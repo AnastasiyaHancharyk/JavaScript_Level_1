@@ -53,11 +53,11 @@ const age = 25;
 age = 26; // приведет к ошибке
 
 // 4. Так же как и let, не поддерживает повторное объявление, например:
-let language = "English";
-let language = "Spanish"; // приведет к ошибке
+const language = "English";
+const language = "Spanish"; // приведет к ошибке
 
 // 5. Так же как и в случае с let, переменные, объявленные в рамках блока, не будут видны за его пределами, например:
 {
-    var city = "Tokyo";
+    const city = "Tokyo";
 }
 console.log(city); // приведет к ошибке
