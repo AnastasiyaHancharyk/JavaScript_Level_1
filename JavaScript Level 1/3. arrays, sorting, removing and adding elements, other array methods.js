@@ -4,13 +4,16 @@ exampleArray[0] = "Zero";
 exampleArray[1] = "One";
 exampleArray[2] = "Two";
 // или
-let exampleArray = ["Zero", "One", "Two"] 
+let exampleArray = ["Zero", "One", "Two"];
+
 
 
 
 // Reading 
 // Для чтения элементов массива можно присвоить переменной значение элемента массива, например:
+let exampleArray = ["Zero", "One", "Two"];
 let x = exampleArray[0];   // в данном случае x присвоено значение элемента с индексом [0], то есть при выводе в консоль отобразится значение "Zero".
+
 
 
 
@@ -33,29 +36,69 @@ xampleArray.unshift("-1", "-2",);  // Добавленные элементы п
 
 // Removing
 // Удалить конкретный элемент массива можно с помощью метода delete, например:
-let exampleArray = ["Zero", "One", "Two"]
+let exampleArray = ["Zero", "One", "Two"];
 delete exampleArray[2];      // Элемент под индексом [2] ("Two") будет удален из массива, а значение этого элемента будет изменено на undefined.
 
 // Также можно с помощью свойства lenght уменьшить длину массива, что повлечет за собой удаления тех элементов, которые не входят в length. Например:
-let exampleArray = ["Zero", "One", "Two"]
+let exampleArray = ["Zero", "One", "Two"];
 exampleArray.length = 2;     // Останутся только первые два элемента, последний будет удалён.
 
 // Удалить элемент в конце массива можно с помощью метода pop():
-let exampleArray = ["Zero", "One", "Two"]
+let exampleArray = ["Zero", "One", "Two"];
 exampleArray.pop();          // Останутся только первые два элемента, последний будет удалён.
 
 // Удалить элемент в начале массива можно с помосщью метода shift():
-let exampleArray = ["Zero", "One", "Two"]
+let exampleArray = ["Zero", "One", "Two"];
 exampleArray.shift();        // Первый элемен ("Zero") будет удален, а "One" приобретет идекс [0].
 
 
 
-// Sorting
 
+// Sorting
+// Метод sort() сортирует элементы в исходном массиве и возвращает массив, отсортированный в алфавитном порядке. При этом элементы сортируются как строки, например:
+let exampleArray = [66, 23, 15, 5];
+exampleArray.sort();       // После сортировки массив будет выглядеть как [15, 23, 5, 66], так как по умолчанию элементы сортируются как строки.
+// или
+let exampleArray = ["Watermelon", "Lemon", "Apple"];
+exampleArray.sort();       // После сортировки массив будет выглядеть как ["Apple", "Lemon", "Watermelon"] (в алфавитном порядке).
+
+// Для более точной сортировки строк лучше использовать метод localeCompare(). Например:
+let exampleArray = ["Watermelon", "Lemon", "Apple"];
+exampleArray.sort((a, b) => a.localeCompare(b));
+
+// Для того, чтобы элементы с типом number сортировались в корректном порядке, можно использовать функции:
+let exampleArray = [ 61, 12, 25, 22, 188, 635 ];
+exampleArray.sort(function(a, b) { return a - b; });
+// или
+exampleArray.sort( (a, b) => a - b );
+// В результате вернется массив, отсортированный в порядке возрастания: [12, 22, 25, 61, 188, 635].
+
+// Для сортировки чисел в порядке убывания используется следующие функции:
+exampleArray.sort(function(a, b) { return b - a; });
+// или 
+exampleArray.sort( (a, b) => b - a );
 
 
 
 
 // Other array methods
+// splice - позволяет добавлять, удалять и заменять элементы и имеет следующий вид:
+exampleArray.splice(start, deleteCount, element1, ... elementN);
+// Начиная с индекса start удаляется deleteCount элементов и затем добавляются элементы element1, ... elementN на их место. Например:
+let exampleArray = ["Watermelon", "Lemon", "Apple"];
+exampleArray.splice(1, 1, "Orange", "Melon");  // Начиная с 1 элемента, удалится один элемент (Lemon), и на его место добавятся два новых.
 
 
+// slice
+
+// concat
+
+// forEach
+
+// Поиск в массиве
+
+// reverse - данный метод меняет порядок элементов в массиве на обратный, например:
+let exampleArray = ["Zero", "One", "Two"];
+exampleArray.reverse();    // Массив будет преобразован в ["Two", "One", "Zero"].
+
+// split and join
