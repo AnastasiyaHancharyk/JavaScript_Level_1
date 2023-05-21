@@ -84,21 +84,37 @@ exampleArray.sort( (a, b) => b - a );
 // Other array methods
 // splice - позволяет добавлять, удалять и заменять элементы и имеет следующий вид:
 exampleArray.splice(start, deleteCount, element1, ... elementN);
-// Начиная с индекса start удаляется deleteCount элементов и затем добавляются элементы element1, ... elementN на их место. Например:
+    // Начиная с индекса start удаляется deleteCount элементов и затем добавляются элементы element1, ... elementN на их место. Например:
 let exampleArray = ["Watermelon", "Lemon", "Apple"];
-exampleArray.splice(1, 1, "Orange", "Melon");  // Начиная с 1 элемента, удалится один элемент (Lemon), и на его место добавятся два новых.
+exampleArray.splice(0, 1, "Orange", "Melon");  // Начиная с нулевого [0] элемента удалится один элемент (Watermelon), и на его место добавятся два новых.
+    // Данный метод также позволяет удалять элементы без добаления новых:
+let exampleArray = ["Watermelon", "Lemon", "Apple"];
+exampleArray.splice(0, 1); // Будет удалён нулевой элемент.
+    // И также добавлять элементы без удаления, например:
+let exampleArray = ["Watermelon", "Lemon", "Apple"];
+exampleArray.splice(1, 0, "Orange", "Melon"); // Перед первым элементом добавятся два новых.
 
 
-// slice
+// slice - возвращает новый массив, в который скопированы элементы в пределах указанных индексов, например:
+let exampleArray = ["Watermelon", "Lemon", "Apple", "Orange", "Melon"];
+exampleArray.slice(1, 3); // Новый массив будет включать в себя значения с индексами 1 и 2 (не включая 3-й).
+    // Если вызвать .slice() без аргументов, то вернется копия оригинального массива.
 
-// concat
 
-// forEach
+// concat - позволяет создать новый массив,в который копируются данные из старого масива + новые дополнительные значения/массивы:
+let exampleArray = ["Zero", "One", "Two"];
+console.log(exampleArray.concat(["Three", "Four"], 5, 6, "7"));
+
+
+// forEach - позволяет запускать функцию для каждого элемента массива, например:
+
 
 // Поиск в массиве
+
 
 // reverse - данный метод меняет порядок элементов в массиве на обратный, например:
 let exampleArray = ["Zero", "One", "Two"];
 exampleArray.reverse();    // Массив будет преобразован в ["Two", "One", "Zero"].
+
 
 // split and join
