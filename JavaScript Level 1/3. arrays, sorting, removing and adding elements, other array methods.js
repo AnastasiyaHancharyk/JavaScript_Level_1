@@ -107,12 +107,44 @@ console.log(exampleArray.concat(["Three", "Four"], 5, 6, "7"));
 
 
 // forEach - позволяет запускать функцию для каждого элемента массива, например:
+let exampleArray = ["Watermelon", "Lemon", "Apple"];
+exampleArray.forEach(alert);  // Во всплывающем окне будет выведен каждый элемент массива по отдельности.
+
+["Watermelon", "Lemon", "Apple"].forEach((item, index, array) => {
+    console.log(item);   // В консоли будет выведено значение каждого элемента;
+    console.log(index);  // ... индекс каждого элемента;
+    console.log(array);  // ... сам массив;
+  });
 
 
 // Поиск в массиве
+  // .indexOf(item, from) - ищет значение начиная с индекса from и затем возвращает номер индекса, которому соответствует найденный элемент. Например:
+  let NewArray = ["Karate", "Aikido", "Boxing","Muay Thai", "Kung Fu"];
+    console.log(NewArray.indexOf("Aikido"));        // Если не указано индекс, то по умолчанию поиск идет с начала (с [0]);
+    console.log(NewArray.indexOf("Karate", 2));     // В массиве "Karate" имеет индекс [0], а поиск ведется со второго, поэтому элемент найден не будет (в консоливернется -1);
+    console.log(NewArray.indexOf("Muay Thai", 1));  // Вернется индекс [3];
+  
+  // .includes(item, from) - ищет значение начиная с индекса from и возвращает true, если поиск успешен, например:
+  let NewArray = ["Karate", "Aikido", "Boxing","Muay Thai", "Kung Fu"];
+    console.log(NewArray.includes("Aikido"));       // Вернется true;
+    console.log(NewArray.includes("Karate", 2));    // Вернется false;
+    console.log(NewArray.includes("Muay Thai", 1)); // Вернется true;
+
+  // .lastIndexOf(item, from) - работает по принципу indexOf, но поиск идет с конца (справа налево), например:
+  let NewArray = ["Karate", "Aikido", "Boxing","Muay Thai", "Kung Fu", "Karate"];
+    console.log(NewArray.indexOf("Karate"));      // Вернется индекс 0;
+    console.log(NewArray.lastIndexOf("Karate"));  // Вернется индекс 5;
+
+  // .find(function(item, index, array) {}
+
+  // .findIndex 
+
+  // .findLastIndex 
+
+  // .filter(fn)
 
 
-// reverse - данный метод меняет порядок элементов в массиве на обратный, например:
+    // reverse - данный метод меняет порядок элементов в массиве на обратный, например:
 let exampleArray = ["Zero", "One", "Two"];
 exampleArray.reverse();    // Массив будет преобразован в ["Two", "One", "Zero"].
 
