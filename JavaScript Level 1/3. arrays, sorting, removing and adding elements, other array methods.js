@@ -125,17 +125,17 @@ exampleArray.forEach(alert);  // Во всплывающем окне будет
     console.log(NewArray.indexOf("Muay Thai", 1));  // Вернется индекс [3];
   
   // .includes(item, from) - ищет значение начиная с индекса from и возвращает true, если поиск успешен, например:
-  let NewArray = ["Karate", "Aikido", "Boxing","Muay Thai", "Kung Fu"];
-    console.log(NewArray.includes("Aikido"));       // Вернется true;
-    console.log(NewArray.includes("Karate", 2));    // Вернется false;
-    console.log(NewArray.includes("Muay Thai", 1)); // Вернется true;
+  let NewArray1 = ["Karate", "Aikido", "Boxing","Muay Thai", "Kung Fu"];
+    console.log(NewArray1.includes("Aikido"));       // Вернется true;
+    console.log(NewArray1.includes("Karate", 2));    // Вернется false;
+    console.log(NewArray1.includes("Muay Thai", 1)); // Вернется true;
 
   // .lastIndexOf(item, from) - работает по принципу indexOf, но поиск идет с конца (справа налево), например:
-  let NewArray = ["Karate", "Aikido", "Boxing","Muay Thai", "Kung Fu", "Karate"];
-    console.log(NewArray.indexOf("Karate"));      // Вернется индекс 0;
-    console.log(NewArray.lastIndexOf("Karate"));  // Вернется индекс 5;
+  let NewArray2 = ["Karate", "Aikido", "Boxing","Muay Thai", "Kung Fu", "Karate"];
+    console.log(NewArray2.indexOf("Karate"));      // Вернется индекс 0;
+    console.log(NewArray2.lastIndexOf("Karate"));  // Вернется индекс 5;
 
-  // .find(function(item, index, array) {}
+  // .find -позволяет найти объект с определенным условием
 
   // .findIndex 
 
