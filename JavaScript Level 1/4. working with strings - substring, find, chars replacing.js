@@ -49,5 +49,28 @@ let pet = `
   let q = "Simba is a cat";
   console.log(q.substring(0, 5));  // Будет выведен текст с 0 по 4 индексы - "Simba";
 
-  // slice - аналогичен substring, но иначе оаботает с отрицательными и выходящими за границу строки аргументами:
-    
+  // slice - аналогичен substring, но иначе работает с отрицательными и выходящими за границу строки аргументами:
+  let text = "Some text";
+  console.log(text.substring(-2));  // [-2] преобразуется в [0] и будет выведено 'Some text'
+  console.log(text.slice(-2));      // Отсчет пойдет от второй позиции с конца и будет выведено 'xt'
+
+
+  // Поиск подстроки в строке:
+  // indexOf(searchValue, fromIndex) - поиск подстроки searchValue начиная с индекса fromIndex (указание индекс является необязательным)
+  let c = "Cat, Dog, Fish, Mouse, Cat";
+  console.log(c.indexOf("Cat", 0));   // Вернется индекс ноль [0]
+  console.log(c.indexOf("Cat", 1));   // Вернется идекс [23]
+
+  // lastIndexOf(searchValue, toIndex) - поиск последней указанной подстроки до указанного идекса (то есть поиск идет с конца строки)
+  console.log(c.lastIndexOf("Cat", 10));   // Вернется индекс ноль [0]
+  console.log(c.lastIndexOf("Cat", 23));   // Вернется идекс [23]
+
+  // search() - возвращается индекс первого совпадения или -1, если ничего не найдено.
+
+  // match() - возвращает массив всех совпадений.
+
+
+  // Преобразование типов:
+  // fromCharCode(num1, num2,...,numN) - создание строки из значений символом Юникода, например:
+  let CAT = String.fromCharCode(67, 65, 84);
+  console.log(x);   // Будет выведено CAT
