@@ -55,7 +55,9 @@ let pet = `
   console.log(text.slice(-2));      // Отсчет пойдет от второй позиции с конца и будет выведено 'xt'
 
 
-  // Поиск подстроки в строке:
+  // Поиск в строке:
+  // find() - 
+
   // indexOf(searchValue, fromIndex) - поиск подстроки searchValue начиная с индекса fromIndex (указание индекс является необязательным)
   let c = "Cat, Dog, Fish, Mouse, Cat";
   console.log(c.indexOf("Cat", 0));   // Вернется индекс ноль [0]
@@ -73,4 +75,23 @@ let pet = `
   // Преобразование типов:
   // fromCharCode(num1, num2,...,numN) - создание строки из значений символом Юникода, например:
   let CAT = String.fromCharCode(67, 65, 84);
-  console.log(x);   // Будет выведено CAT
+  console.log(CAT);   // Будет выведено CAT
+
+  // toString() и valueOf() - возвращают элементарную строку вместо объекта String, например:
+  let value = new String("Cats");
+  console.log(typeof value);             // В консоль будет выведен тип object;
+  console.log(typeof value.valueOf());   // В консоль будет выведен тип string;
+  console.log(typeof value.toString());  // В консоль будет выведен тип string;
+
+
+  // Замена значений в строке:
+  // replace() позволяет заменять одно значение на другое:
+  let w = "26-05-2023";
+  console.log(w.replace("-", ":"));   // Будет изменено только первое совпадение, и результатом будет "26:05-2023"
+  
+  console.log(w.replace(/-/g, ":"));  // Будут изменены все совпадения, и результатом будет "26:05:2023"
+
+  let e = "some text"
+  console.log(e.replace(/(\w+)\s(\w+)/, "$2, $1"));  // Слова поменяются местами и результатом будет "text, some"
+
+  
