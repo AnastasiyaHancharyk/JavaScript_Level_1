@@ -3,7 +3,7 @@
 // Create operations
    // 1. fs.open():
    let fs = require("fs");
-   fs.open("New File.txt", "r", function (err) {
+   fs.open("C:\Users\YOGA\Desktop\Работа\JS\New File.txt", "w", function (err) {
       if (err) throw err;
       console.log("Done!");
     });
@@ -23,7 +23,7 @@
 */
 
 
-   // 2. fs.appendFile() - добавляет указанное значение в файл. Если же файл не существует, он будет создан:
+   // 2. fs.appendFile() - добавляет указанное значение в конец файла. Если же файл не существует, он будет создан:
    let fs = require("fs");
    fs.appendFile("New File.txt", "Red Cat :)", function(err) {
     if (err) throw err;
@@ -39,8 +39,34 @@
    });                     // В созданном ранее файле старое значение "Red Cat :)" будет изменено на указанное выше - "Orange Kitten Simba".
 
 
-// Find
+// Find :(  
+
+const path = require('path')
+const notes = "C:\\Users\\YOGA\\Desktop\\Работа\\JS\\NodeJS\\New File.txt"
+path.dirname(notes)
+path.basename(notes)
+path.extname(notes)
+path.basename(notes, path.extname(notes))
+
+
+
+let fs = require("fs");
+fs.writeFile("C:\\Users\\YOGA\\Desktop\\Работа\\JS\\NodeJS\\New File.txt", "Orange Kitten Simba", function(err) {
+ if (err) throw err;
+ console.log("Done!");
+});   
+
+
 
 // Delete file
+   // fs.unlink() - удаляет выбранный файл:
+   let fs = require("fs");
+   fs.unlink("New File.txt", function(err) {
+      if (err) throw err;
+      console.log("Done!");
+   });
 
-// Save information into file
+
+// Save information into file - для изменения информации в файле используются следующие методы:
+   // 1. fs.appendFile()
+   // 2. fs.writeFile()
