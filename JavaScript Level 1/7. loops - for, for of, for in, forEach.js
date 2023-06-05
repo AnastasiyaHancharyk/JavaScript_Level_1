@@ -1,5 +1,3 @@
-// В JavaScript оператор for .. of предназначен для перечисления элементов массива, а оператор for .. in свойств объекта.
-
 // Цикл for повторяет действия, пока соблюдается указанное условие, после чего он будет завершен. Имеет следующий вид:
 //        for ([начальное значение]; [конечное значение/условие]; [шаг]) { ... }. Например:
 for (let x = 1; x < 3; x++) {
@@ -19,9 +17,29 @@ for (let y = 0; y < pets.length; y++) {
 }
 
 
-// for in используется для перебора свойств объекта
+// for in используется для перебора свойств объекта(пройдёт по каждому отдельному элементу), например:
+let list = {
+  cat: "Simba",
+  dog: "Maya",
+  snail: "Ulitka"
+};
+for (let a in list) {
+  console.log("The " + a + "'s name is " + list[a] + ".");
+}
+/* Будет выведено: 
+The cat's name is Simba.
+The dog's name is Maya.
+The snail's name is Ulitka.
+*/
 
 
-// for Each
-
-
+// for Each - позволяет применить колбэк-функцию ко всем элементам массива. Можно использовать вместо классического цикла for (в отличие от него, forEach() выглядит более читабельным и понятным). Например:
+let pets_name = ["Simba", "Maya", "Ulitka"];
+pets_name.forEach(function (a) {
+  console.log("Pet's name is " + a + ".");
+});
+/* Будет выведено:
+Pet's name is Simba.
+Pet's name is Maya.
+Pet's name is Ulitka.
+*/

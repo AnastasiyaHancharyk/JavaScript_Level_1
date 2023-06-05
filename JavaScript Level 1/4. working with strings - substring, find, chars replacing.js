@@ -13,20 +13,23 @@ let pet = `
   console.log(pet);
 
 
-// Свойства строк:
+// СВОЙСТВА СТРОК:
+
   //  .length - возвращает количество символов в строке, например:
   let cat = "Simba";
   console.log(cat.length);  // вернется длина строки - 5
 
 
 
-// Методы строк:
+// МЕТОДЫ СТРОК:
+
   // Для доступа к символу в строке можно использовать методы .charAt() и обращение к строке как к массиву.
   let Cat = "Simba";
   console.log(Cat.charAt(4));   // будет выведен символ с индексом 4 - "a"
 
   let Cat_2 = "Simba";
   console.log(Cat_2[4]);        // будет выведен символ с индексом 4 - "a"
+
 
   // concat() - для слияния строк:
   let x = "Cat's ";
@@ -49,33 +52,49 @@ let pet = `
   let q = "Simba is a cat";
   console.log(q.substring(0, 5));  // Будет выведен текст с 0 по 4 индексы - "Simba";
 
+
   // slice - аналогичен substring, но иначе работает с отрицательными и выходящими за границу строки аргументами:
   let text = "Some text";
   console.log(text.substring(-2));  // [-2] преобразуется в [0] и будет выведено 'Some text'
   console.log(text.slice(-2));      // Отсчет пойдет от второй позиции с конца и будет выведено 'xt'
 
 
-  // Поиск в строке:
-  // find() - 
+
+  // ПОИСК В СТРОКЕ:
 
   // indexOf(searchValue, fromIndex) - поиск подстроки searchValue начиная с индекса fromIndex (указание индекс является необязательным)
   let c = "Cat, Dog, Fish, Mouse, Cat";
   console.log(c.indexOf("Cat", 0));   // Вернется индекс ноль [0]
   console.log(c.indexOf("Cat", 1));   // Вернется идекс [23]
 
+
   // lastIndexOf(searchValue, toIndex) - поиск последней указанной подстроки до указанного идекса (то есть поиск идет с конца строки)
   console.log(c.lastIndexOf("Cat", 10));   // Вернется индекс ноль [0]
   console.log(c.lastIndexOf("Cat", 23));   // Вернется идекс [23]
 
+
   // search() - возвращается индекс первого совпадения или -1, если ничего не найдено.
+  let pass_phrase = "Wonderful weather this morning, isn't it?";
+  console.log(pass_phrase.search("is"));      // Вернется индекс [20] - первое совпадение в this;
+  console.log(pass_phrase.search("these"));   // Вернется [-1] - нет совпадений;
 
-  // match() - возвращает массив всех совпадений.
+  // match() - возвращает массив всех совпадений, например:
+  let some_text = "Some 1 text 2 is 3 written 4 here 5";
+  console.log(some_text.match(/\D+/g));   // Будет выведено ["Some ", " text ", " is ", " written", "here"].
+  console.log(some_text.match(/\d+/g));   // Будет выведено ["1", "2", "3", "4", "5"].
+  // Также его можно использовать, чтобы вернуть все значения кроме указанного в условии, например:
+  let phrase = "Random words in front of other random words create a random sentence.";
+  let remove_word = /\b(?:(?!random)\w)+\b/gmi;
+  console.log(phrase.match(remove_word));        // Вернется ["words", "in", "front", "of", "other", "words", "create", "a", "sentence"]
 
 
-  // Преобразование типов:
+
+  // ПРЕОБРАЗОВАНИЕ ТИПОВ:
+
   // fromCharCode(num1, num2,...,numN) - создание строки из значений символом Юникода, например:
   let CAT = String.fromCharCode(67, 65, 84);
   console.log(CAT);   // Будет выведено CAT
+
 
   // toString() и valueOf() - возвращают элементарную строку вместо объекта String, например:
   let value = new String("Cats");
@@ -84,7 +103,9 @@ let pet = `
   console.log(typeof value.toString());  // В консоль будет выведен тип string;
 
 
-  // Замена значений в строке:
+
+  // ЗАМЕНА ЗНАЧЕНИЕЙ В СТРОКЕ:
+  
   // replace() возвращает новую строку с некоторыми или всеми сопоставлениями с шаблоном, заменёнными на заменитель:
   let w = "26-05-2023";
   console.log(w.replace("-", ":"));   // Будет изменено только первое совпадение, и результатом будет "26:05-2023"
@@ -97,4 +118,4 @@ let pet = `
   // g - глобальное сопоставление
   // i - игнорировать регистр
   let r = "Some text";
-  console.log(r.replace(/some/gi, "another")); // Результатом будет вывод в консоль "Another text"
+  console.log(r.replace(/some/gi, "Another")); // Результатом будет вывод в консоль "Another text"
