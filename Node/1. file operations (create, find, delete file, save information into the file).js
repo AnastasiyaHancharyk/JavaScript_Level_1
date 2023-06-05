@@ -39,22 +39,26 @@
    });                     // В созданном ранее файле старое значение "Red Cat :)" будет изменено на указанное выше - "Orange Kitten Simba".
 
 
-// Find :(  
-
-const path = require('path')
-const notes = "C:\\Users\\YOGA\\Desktop\\Работа\\JS\\NodeJS\\New File.txt"
-path.dirname(notes)
-path.basename(notes)
-path.extname(notes)
-path.basename(notes, path.extname(notes))
 
 
 
-let fs = require("fs");
-fs.writeFile("C:\\Users\\YOGA\\Desktop\\Работа\\JS\\NodeJS\\New File.txt", "Orange Kitten Simba", function(err) {
- if (err) throw err;
- console.log("Done!");
-});   
+
+// Find - с помощью данного метода можно будет найти все файлы по указанному шаблону:
+
+let glob = require('glob')
+
+glob('NodeJS/**/*.txt', (err, files) => {
+  if (err) {
+    return console.error(err)
+  }
+
+  console.log(files)
+
+    files.forEach(file => {
+    console.log(file)
+  })
+})
+
 
 
 
