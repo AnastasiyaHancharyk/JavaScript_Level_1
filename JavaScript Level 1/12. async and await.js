@@ -11,5 +11,5 @@
   function some_text_2() {
     return Promise.resolve("Text");
   }
-  console.log(some_text_2()); // Вернется Promise {}
+  console.log(some_text_2()); // Вернется Promise {} 
 
