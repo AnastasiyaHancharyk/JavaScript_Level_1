@@ -1,6 +1,6 @@
 module.exports = class Page {
     
-    open () {
-        return browser.url(`https://google.com/`)
+    open (path) {
+        return browser.url(`https://google.com/${path}`)
     }
 }

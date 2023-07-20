@@ -1,6 +1,6 @@
 const Page = require('./main.page');
 
-class Search extends Page {
+class Search extends Page {    // The extends keyword is used in class declarations or class expressions to create a class that is a child of another class.
     get inputSearch () {
         return $('textarea[id="APjFqb"]');
     }
@@ -15,7 +15,7 @@ class Search extends Page {
     }
 
     open () {
-        return super.open();
+        return super.open('');
     }
 }
 

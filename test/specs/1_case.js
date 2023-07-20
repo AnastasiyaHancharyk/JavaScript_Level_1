@@ -8,6 +8,7 @@
 
 
 const Search = require('../pageobjects/searching')
+const Results = require('../pageobjects/results.page')
 
 describe('Web Automation Level 1', () => {
     it('First Case', async () => {
@@ -15,6 +16,10 @@ describe('Web Automation Level 1', () => {
 
         await Search.new_search('Cats');
 
-        await browser.pause(5000);
+        await browser.pause(2000);
+
+        console.log("Log " + Results.results_page())
+
+        await browser.pause(2000);
     })
 })
