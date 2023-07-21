@@ -1,12 +1,22 @@
 const Page = require('./main.page');
 
 class Results extends Page {
-    get numberOfResults (){
-        return $('.//*[@id="result-stats"]/text()');
+    get numberOfResults () {
+        return $('//div[@id="result-stats"]');
     }
 
-    async results_page () {
-        await this.numberOfResults.getText();
+    get result_links () {
+        return $$('.//h3[@class="LC20lb MBeuO DKV0Md"]');
+    }
+
+    async results_stats () {
+        const x = await this.numberOfResults.getText();
+        return "Number of results: " + x;
+    }
+
+    async name_of_links (text) {
+        await expect(this.result_links).toBeExisting()
+        const y = await expect(this.result_links).toHaveTextContaining(text); 
     }
     
 
