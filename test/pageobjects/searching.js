@@ -1,4 +1,4 @@
-const Page = require('./main.page');
+const Page = require('./BasePage');
 
 const INPUT_FIELD = 'textarea[id="APjFqb"]';
 const SEARCH_BUTTON = 'input[type=submit]';
@@ -12,9 +12,9 @@ class Search extends Page {    // The extends keyword is used in class declarati
         return $(SEARCH_BUTTON);
     }
 
-    async new_search (value) {
-        await this.InputSearch.setValue(value);
-        await this.BtnSearch.click();
+
+    async newSearch (value) {
+        await this.Searching(this.InputSearch, this.BtnSearch, value);
     }
 
     open () {

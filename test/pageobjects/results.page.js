@@ -1,4 +1,4 @@
-const Page = require('./main.page');
+const Page = require('./BasePage');
 
 const NUMBER_OF_RESULTS = '//div[@id="result-stats"]';              // Количество найденных результатов
 const NAME_OF_LINK = '//h3[@class="LC20lb MBeuO DKV0Md"]';          // Результат-ссылка (название)
@@ -58,6 +58,7 @@ class Results extends Page {
         await this.SearchButton.click();
     }
 
+
     async results_stats () {          // Количество отображаемых результатов
         const x = await this.NumberOfResults.getText();
         return "Number of results: " + x;
@@ -67,6 +68,8 @@ class Results extends Page {
         await expect(this.ResultLinks).toBeExisting()
         await expect(this.ResultLinks).toHaveTextContaining(text); 
     }
+
+    
     
     async searching_images (attribute, value) {    // Отображаемые результаты-картинки (label)
         // await expect(this.images).toBeExisting()
