@@ -14,7 +14,7 @@ class Search extends Page {    // The extends keyword is used in class declarati
 
 
     async newSearch (value) {
-        await this.Searching(this.InputSearch, this.BtnSearch, value);
+        await this.searching(this.InputSearch, this.BtnSearch, value);
     }
 
     open () {

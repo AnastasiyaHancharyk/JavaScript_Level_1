@@ -15,8 +15,8 @@ describe('Web Automation Level 1', () => {
         await Search.open();               // Открытие страницы
         await Search.newSearch('Cats');   // Ввод текста и поиск
 
-        // await browser.pause(2000);
-        // Results.results_stats().then(console.log);  // Вывод в консоль количества результатов поиска
+        await browser.pause(2000);
+        Results.resultStats().then(console.log);  // Вывод в консоль количества результатов поиска
 
         // await Results.name_of_links(/cat/i);  // Проверка, что каждый результат содержит cat
 
