@@ -14,7 +14,7 @@ describe('Web Automation Level 1', () => {
         await Search.newSearch('Cats');   // Ввод текста и поиск
 
         await browser.pause(2000);
-        await Results.NewResultsSearch('Manul');
+        await Results.newResultsSearch('Manul');
 
         // await Results.open_the_link('href', 'https://en.wikipedia.org/wiki/Cat');
 

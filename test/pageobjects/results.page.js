@@ -6,7 +6,7 @@ const LINK_HREF = '//h3[@class="LC20lb MBeuO DKV0Md"]';             // Ссыл�
 const SEARCH_FIELD = '//textarea';                                 // Поле для поиска
 const SEARCH_BUTTON = '//button[@jsname="Tg7LZd"]';                 // Кнопка поиска
 const IMAGE_NAME = '//div[@class="zbRPDe M2qv4b"]';                // Отображаемые картинки-результаты (название)
-const RESULT_TYPE_IMAGES = '//div[contains(text(), "Відарысы")]';  // Ссылка на результаты (картинки)
+const RESULT_TYPE_IMAGES = '//a/*[contains(text(), "Відарысы")]';  // Ссылка на результаты (картинки)
 const ADD_PARAMETERS_TABBY = '//a[contains(@aria-label, "tabby")]';      // Уточнение для картинок
 
 
@@ -67,10 +67,10 @@ class Results extends Page {
     }
 
     async selectingTypeImages() {   // Открытие вкладки с картинками
-        await this.buttonClick(this.TypeOfResultImages);
+        await this.buttonClick(this.typeOfResultImages);
     }
 
-    async selecting_parameters() {   // Уточнение для вкладки с картинками
+    async selectingImageParameters() {   // Уточнение для вкладки с картинками
         await this.selectingParameters(this.additionalParametersTabby);
     }
 
