@@ -18,7 +18,7 @@ describe('Web Automation Level 1', () => {
         await browser.pause(2000);
         Results.resultStats().then(console.log);  // Вывод в консоль количества результатов поиска
 
-        // await Results.name_of_links(/cat/i);  // Проверка, что каждый результат содержит cat
+        await Results.nameOfLinks(/cat/i);  // Проверка, что каждый результат содержит cat
 
         await browser.pause(2000);
     })

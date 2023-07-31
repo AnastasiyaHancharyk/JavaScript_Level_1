@@ -3,7 +3,7 @@
 - ввести в поиск Cat
 - перейти в картинки
 - выбрать уточнение для результатов и применить
-- проверить, что название содержит выбранное уточнение */
+- проверить, что названия содержат выбранное уточнение */
 
 const Search = require('../pageobjects/searching')
 const Results = require('../pageobjects/results.page')
@@ -17,7 +17,9 @@ describe('Web Automation Level 1', () => {
 
         await Results.selectingTypeImages();
 
-        // await Results.selectingImageParameters(/tabby/i);
+        await Results.selectingImageParameters(/tabby/i);
+
+        await Results.imagesLabels(/tabby/i)
 
 
         await browser.pause(5000);

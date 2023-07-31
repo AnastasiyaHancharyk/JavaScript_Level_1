@@ -32,9 +32,17 @@ module.exports = class Page {
         await buttonLocator.click();
     }
 
-    async selectingParameters(parameterLocator, ) {   
+    async selectingParameters (parameterLocator, ) {   
         await parameterLocator.scrollIntoView({ block: "end" });
         await parameterLocator.click();     
+    }
+
+    async openTheLink (linkLocator) {
+        await linkLocator.click();
+    }
+
+    async dragAndDropElement (elementLocator, targetLocator) {
+        await elementLocator.dragAndDrop(targetLocator);
     }
 
 

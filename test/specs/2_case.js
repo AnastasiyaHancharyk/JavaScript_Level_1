@@ -16,7 +16,7 @@ describe('Web Automation Level 1', () => {
         await browser.pause(2000);
         await Results.newResultsSearch('Manul');
 
-        // await Results.open_the_link('href', 'https://en.wikipedia.org/wiki/Cat');
+        await Results.openWikipediaLink();
 
         await browser.pause(2000);
 
