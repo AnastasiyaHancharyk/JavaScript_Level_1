@@ -45,6 +45,14 @@ module.exports = class Page {
         await elementLocator.dragAndDrop(targetLocator);
     }
 
+    async getAttribute (locator, attributeName) {
+        return await locator.getAttribute(attributeName);
+    }
+
+    async expectToHaveUrlContaining (someUrl) {
+        await expect(browser).toHaveUrlContaining(someUrl);
+    }
+
 
 
 }
