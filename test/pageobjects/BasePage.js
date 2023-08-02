@@ -4,53 +4,53 @@ module.exports = class Page {
         return browser.url(`https://google.com`)
     }
 
-    async existsAndContainsText (locator, text) {           // Проверка, что элемент существует и содержит определённый текст
-        await expect(locator).toBeExisting()
-        await expect(locator).toHaveTextContaining(text);
+    async existsAndContainsText (selector, text) {           // Проверка, что элемент существует и содержит определённый текст
+        await expect(selector).toBeExisting()
+        await expect(selector).toHaveTextContaining(text);
     }
 
-    async searching (fieldLocator, buttonLocator, text) {    //
-        await fieldLocator.setValue(text);
-        await buttonLocator.click();
+    async searching (fieldSelector, buttonSelector, text) {    //
+        await fieldSelector.setValue(text);
+        await buttonSelector.click();
     }
 
-    async newSearch (fieldLocator, buttonLocator, value) {
-        await fieldLocator.setValue(value);
-        await buttonLocator.click();
+    async newSearch (fieldSelector, buttonSelector, value) {
+        await fieldSelector.setValue(value);
+        await buttonSelector.click();
     }
 
-    async resultStatistic (locator) {
-        return "Number of results: " + await locator.getText();
+    async getText (text, selector) {
+        return text + await selector.getText();
     }
 
-    async existsAndContainsAttribute (locator, attribute, value) {           // Проверка, что элемент существует и содержит определённый аттрибут
-        await expect(locator).toBeExisting()
-        await expect(locator).toHaveAttributeContaining(attribute, value);
+    async existsAndContainsAttribute (selector, attribute, value) {           // Проверка, что элемент существует и содержит определённый аттрибут
+        await expect(selector).toBeExisting()
+        await expect(selector).toHaveAttributeContaining(attribute, value);
     }
 
-    async buttonClick (buttonLocator) {
-        await buttonLocator.click();
+    async click (selector) {
+        await selector.click();
     }
 
-    async selectingParameters (parameterLocator, ) {   
-        await parameterLocator.scrollIntoView({ block: "end" });
-        await parameterLocator.click();     
+    async selectingParameters (parameterSelector, ) {   
+        await parameterSelector.scrollIntoView({ block: "end" });
+        await parameterSelector.click();     
     }
 
-    async openTheLink (linkLocator) {
-        await linkLocator.click();
+    async dragAndDropElement (elementSelector, targetSelector) {
+        await elementSelector.dragAndDrop(targetSelector);
     }
 
-    async dragAndDropElement (elementLocator, targetLocator) {
-        await elementLocator.dragAndDrop(targetLocator);
-    }
-
-    async getAttribute (locator, attributeName) {
-        return await locator.getAttribute(attributeName);
+    async getAttribute (selector, attributeName) {
+        return await selector.getAttribute(attributeName);
     }
 
     async expectToHaveUrlContaining (someUrl) {
         await expect(browser).toHaveUrlContaining(someUrl);
+    }
+
+    async waitForExist (selector, parameters) {
+        await selector.waitForExist(parameters);
     }
 
 

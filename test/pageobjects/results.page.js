@@ -12,6 +12,9 @@ const SEARCH_BY_IMAGE = '//div/*[@class="Gdd5U"]';                        // П�
 const FIELD_SEARCH_BY_IMAGE = '//input[@jsname="W7hAGe"]';                // Поле для поиска по картинке
 const BUTTON_SEARCH_BY_IMAGE = '//div[@jsname="ZtOxCb"]';                 // Кнопка для поиска по картинке
 const IMAGES_LOCATION = '//div[13]/div[2]//div[2]/div/div[1]/div/div/div/div/div/div/div/div[2]/div/div';  // Расположение картинок
+const INSTRUMENTS = '//div[@jscontroller="z2BPKb"]';                      // Интсрументы на вкладке "Картинки"
+const INSTRUMENTS_COLOR = '//*[@id="yDmH0d"]//div[2]/*[@jsname="alDyS"]'; // Отображение по цвету (интсрументы)
+const YELLOW_COLOR = '//div[@style="background-color:#FFEB3B"]';          // Жёлтый цвет
 
 
 class Results extends Page {
@@ -63,20 +66,39 @@ class Results extends Page {
         return $(IMAGES_LOCATION);
     }
 
+    get instruments () {                   // Расположение картинок
+        return $(INSTRUMENTS);
+    }
+
+    get instrumentsColor () {                   // Расположение картинок
+        return $(INSTRUMENTS_COLOR);
+    }
+
+    get yellowColor () {                   // Расположение картинок
+        return $(YELLOW_COLOR);
+    }
 
 
 
 
+
+
+
+
+
+    
     async openWikipediaLink () {    // Открыть ссылку с википедией
-        await this.openTheLink (this.oneResultLink);
+        await this.click (this.oneResultLink);
     }
     
     async newResultsSearch (value) {       // Новый поиск
+        await this.waitForExist(this.textArea, {timeout: 5000});
         await this.newSearch(this.textArea, this.searchButton, value);
     }
 
     async resultStats () {          // Количество отображаемых результатов
-       return await this.resultStatistic(this.numberOfResults);
+        await this.waitForExist(this.numberOfResults, {timeout: 5000});
+        return await this.getText("Number of results: ", this.numberOfResults);
         
     }
 
@@ -89,7 +111,8 @@ class Results extends Page {
     }
 
     async selectingTypeImages() {   // Открытие вкладки с картинками
-        await this.buttonClick(this.typeOfResultImages);
+        await this.waitForExist(this.typeOfResultImages, {timeout: 5000});
+        await this.click(this.typeOfResultImages);
     }
 
     async selectingImageParameters () {   // Уточнение для вкладки с картинками
@@ -98,11 +121,21 @@ class Results extends Page {
 
 
     async searchByImage () {        // Поиск по картинке/ссылке с картинкой
-        await this.buttonClick(this.searchingByImage);
+        await this.waitForExist(this.searchingByImage, {timeout: 5000});
+        await this.click(this.searchingByImage);
         let x = await this.getAttribute(this.imageLocation, 'data-lpage');
         await this.searching (this.fieldForSearchingByImage, this.buttonForSearchingByImage, x);
         await this.expectToHaveUrlContaining('lens.google.com');
     }
+
+    async selectYellowColor () {
+        await this.click(this.instruments);
+        await this.click(this.instrumentsColor);
+        const selectBox = await $('//div[@class="OKAyuf"]')
+        const y = await selectBox.selectByIndex(4);
+        await y.click();
+    }
+
 
 
 

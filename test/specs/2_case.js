@@ -13,7 +13,6 @@ describe('Web Automation Level 1', () => {
         await Search.open();               // Открытие страницы
         await Search.newSearch('Cats');   // Ввод текста и поиск
 
-        await browser.pause(2000);
         await Results.newResultsSearch('Manul');
 
         await Results.openWikipediaLink();
