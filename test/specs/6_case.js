@@ -25,7 +25,7 @@ describe('Web Automation Level 1', () => {
 
         await Results.selectingTypeTypes();   // Переход на вкладку Types
 
-        await Results.selectACatBreed();  // ВЫбор породы кошек
+        await Results.selectACatBreed();  // Выбор породы кошек
 
         await browser.pause(5000);        
 
