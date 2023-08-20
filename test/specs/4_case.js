@@ -16,11 +16,11 @@ describe('Web Automation Level 1', () => {
         await Search.open();               // Открытие страницы
         await Search.newSearch('Cats');   // Ввод текста и поиск
 
-        await Results.addValueToSearch(' Tuxedo')
+        await Results.addValueToSearch(' Tuxedo')    // Добавление в поиск слова Tuxedo
 
-        await Results.selectingTypeImages();
+        await Results.selectingTypeImages();      // Открытие вкладки с картинками
 
-        await Results.selectYellowColor('aria-label', 'Yellow');
+        await Results.selectYellowColor('aria-label', 'Yellow');    // Выбор жёлтого цвета в интсрументах для дополнительной настройки отображаемых результатов
 
         await browser.pause(5000);        
 

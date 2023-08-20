@@ -16,7 +16,7 @@ describe('Web Automation Level 1', () => {
         await Search.open();               // Открытие страницы
         await Search.newSearch('Dogs');   // Ввод текста и поиск
 
-        await Results.searchByImage();
+        await Results.searchByImage();  // Поиск по картинке
 
         await browser.pause(5000);        
 

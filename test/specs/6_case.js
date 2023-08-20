@@ -21,11 +21,11 @@ describe('Web Automation Level 1', () => {
         await Search.open();               // Открытие страницы
         await Search.newSearch('Cats');   // Ввод текста и поиск
 
-        await Results.changeLanguageToEnglish();
+        await Results.changeLanguageToEnglish();   // Изменение языка на английский
 
-        await Results.selectingTypeTypes();
+        await Results.selectingTypeTypes();   // Переход на вкладку Types
 
-        await Results.selectACatBreed();
+        await Results.selectACatBreed();  // ВЫбор породы кошек
 
         await browser.pause(5000);        
 

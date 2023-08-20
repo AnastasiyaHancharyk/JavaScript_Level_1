@@ -14,11 +14,11 @@ describe('Web Automation Level 1', () => {
         await Search.open();               // Открытие страницы
         await Search.newSearch('Cats');   // Ввод текста и поиск
 
-        await Results.selectingTypeImages();
+        await Results.selectingTypeImages();   // Открытие вкладки с картинками
 
-        await Results.selectingImageParameters(/tabby/i);
+        await Results.selectingImageParameters(/tabby/i);   // Выбор параметра, содержащего текст tabby
 
-        await Results.imagesLabels(/tabby/i)
+        await Results.imagesLabels(/tabby/i)    // Проверка, что результаты сожержат tabby в названии
 
 
         await browser.pause(5000);
