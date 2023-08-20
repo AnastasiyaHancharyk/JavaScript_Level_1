@@ -1,9 +1,9 @@
 /* 
-- перейти на google
-- ввести в поиск Cat
-- ввести другое значение в поиск
-- вывести результат
-- открыть ссылку */
+1. Перейти на google.com;
+2. Ввести в поисковой строке Cat и нажать "Поиск";
+3. Ввести в поисковой строке и найти другое значение;
+4. Открыть ссылку Wikipedia.
+*/
 
 const Search = require('../pageobjects/searching')
 const Results = require('../pageobjects/results.page')
