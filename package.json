@@ -3,6 +3,7 @@
     "chai": "^4.3.7",
     "chromedriver": "^116.0.0",
     "mocha": "^10.2.0",
+    "mochawesome": "^7.1.3",
     "selenium-webdriver": "^4.11.1"
   },
   "name": "javascript_level_1",
@@ -13,7 +14,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --no-timeouts --parallel --reporter mochawesome --require mochawesome/register --reporter-options reportDir=/Users/Anastasiya.Hancharyk/Desktop/Studying/Automation/Mocha_Test_Reports --reportFilename=test_results"
   },
   "author": "",
   "license": "ISC"
