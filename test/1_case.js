@@ -6,6 +6,7 @@
 */
 
 const SearchPage = require('./pageobjects/SearchPage');
+const ResultsPage = require('./pageobjects/ResultsPage');
 
 
 describe ("WebDriverIO -> Selenium", () => {
@@ -14,6 +15,13 @@ describe ("WebDriverIO -> Selenium", () => {
         
         await SearchPage.openSite(`https://google.com`);
         await SearchPage.newSearch("Cats");
+        await ResultsPage.resultStats().then(console.log);
+        await ResultsPage.nameOfLinks("Cats")
         await SearchPage.closeTheBrowser();
+
+        // let driver = await new Builder().forBrowser("chrome").build();
+        // await driver.findElement(By.xpath("//li[last()]")).getText().then(function (value) {
+        //     return value;
+        // });
     })
 })

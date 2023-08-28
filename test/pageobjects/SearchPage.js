@@ -1,5 +1,4 @@
 const { Builder, By, Key } = require("selenium-webdriver");
-// const ltCapabilities = require("../capabilities");
 const should = require("chai").should();
 const Page = require('./BasePage');
 
