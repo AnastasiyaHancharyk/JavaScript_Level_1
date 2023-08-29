@@ -1,8 +1,8 @@
 /* 
 1. Перейти на google.com;
-2. ввести в поисковой строке Cat и нажать "Поиск";
-3. вывести в консоль количество найденных результатов;
-4. Проверить, что каждый ответ содержит слово "Cat".
+2. Ввести в поисковой строке Cat и нажать "Поиск";
+3. Ввести в поисковой строке и найти другое значение;
+4. Открыть ссылку Wikipedia.
 */
 
 const SearchPage = require('./pageobjects/SearchPage');
@@ -15,8 +15,8 @@ describe ("WebDriverIO -> Selenium", () => {
         
         await SearchPage.openSite(`https://google.com`);
         await SearchPage.newSearch("Cats");
-        await ResultsPage.resultStats().then(console.log);
-        await ResultsPage.nameOfLinks("CAT");
+        await ResultsPage.newResultsSearch("Manul");
+        await ResultsPage.openWikipediaLink();
         await SearchPage.closeTheBrowser();
 
     })

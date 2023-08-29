@@ -7,13 +7,13 @@ const NAME_OF_LINK = '//h3[@class="LC20lb MBeuO DKV0Md"]';                      
 const LINK_HREF = '//*[contains (@href, "wikipedia.org")]';                         // Ссылка на результат (wikipedia)
 const SEARCH_FIELD = '//textarea';                                                  // Поле для поиска
 const SEARCH_BUTTON = '//button[@jsname="Tg7LZd"]';                                 // Кнопка поиска
-const IMAGE_NAME = '//div[@class="zbRPDe M2qv4b"]';                                 // Отображаемые картинки-результаты (название)
+const IMAGE_NAME = '//div[@class="zbRPDe M2qv4b P4HtKe"]';                          // Отображаемые картинки-результаты (название)
 const RESULT_TYPE_IMAGES = '//*[contains(text(), "Відарысы")]';                     // Ссылка на результаты (картинки)
 const ADD_PARAMETERS_TABBY = '//a[contains(@aria-label, "tabby")]';                 // Уточнение для картинок
 const SEARCH_BY_IMAGE = '//div/*[@class="Gdd5U"]';                                  // Поиск по картинке
 const FIELD_SEARCH_BY_IMAGE = '//input[@jsname="W7hAGe"]';                          // Поле для поиска по картинке
 const BUTTON_SEARCH_BY_IMAGE = '//div[@jsname="ZtOxCb"]';                           // Кнопка для поиска по картинке
-const IMAGES_LOCATION = '//div[13]/div[2]//div[2]/div/div[1]/div/div/div/div/div/div/div/div[2]/div/div'; // Расположение картинок
+const IMAGES_LOCATION = '//img[@id="dimg_9"]';                            // Расположение картинок
 const INSTRUMENTS = '//div[@jscontroller="z2BPKb"]';                                // Интсрументы на вкладке "Картинки"
 const INSTRUMENTS_COLOR = '//*[@id="yDmH0d"]//div[2]/*[@jsname="alDyS"]';           // Отображение по цвету (интсрументы)
 const YELLOW_COLOR = '//div[@style="background-color:#FFEB3B"]';                    // Жёлтый цвет
@@ -33,139 +33,177 @@ const CAT_BREEDS = '//div[@class="JjtOHd"]';                                    
 class Results extends Page {
 
     // Количество найденных результатов
-    get numberOfResults () {                 
+    get numberOfResults() {
         return By.xpath(NUMBER_OF_RESULTS);
     }
 
     // Результат-ссылка (название)
-    get resultLinks () {                     
+    get resultLinks() {
         return By.xpath(NAME_OF_LINK);  //!!
     }
 
     // Ссылка на результат (wikipedia)
-    get oneResultLink () {                   
-        return By.xpath(LINK_HREF);   
+    get oneResultLink() {
+        return By.xpath(LINK_HREF);
     }
 
     // Поле для поиска
-    get textArea () {                        
+    get textArea() {
         return By.xpath(SEARCH_FIELD);
     }
- 
+
     // Кнопка поиска
-    get searchButton () {                    
+    get searchButton() {
         return By.xpath(SEARCH_BUTTON);
     }
-   
+
     // Название ссылок на картинки
-    get imageName () {                       
+    get imageName() {
         return By.xpath(IMAGE_NAME); //!!
     }
 
     // Ссылка на картинки
-    get typeOfResultImages () {              
+    get typeOfResultImages() {
         return By.xpath(RESULT_TYPE_IMAGES);
     }
 
     // Уточнение для картинок (tabby)
-    get additionalParametersTabby () {       
+    get additionalParametersTabby() {
         return By.xpath(ADD_PARAMETERS_TABBY);
     }
 
     // Поиск по картинке
-    get searchingByImage () {                
+    get searchingByImage() {
         return By.xpath(SEARCH_BY_IMAGE);
     }
 
     // Поле для поиска по картинке
-    get fieldForSearchingByImage () {        
+    get fieldForSearchingByImage() {
         return By.xpath(FIELD_SEARCH_BY_IMAGE);
     }
 
     // Кнопка для поиска по картинке
-    get buttonForSearchingByImage () {       
+    get buttonForSearchingByImage() {
         return By.xpath(BUTTON_SEARCH_BY_IMAGE);
     }
- 
+
     // Расположение картинок
-    get imageLocation () {                   
+    get imageLocation() {
         return By.xpath(IMAGES_LOCATION);
     }
 
     // Интсрументы на вкладке "Картинки"
-    get instruments () {                  
+    get instruments() {
         return By.xpath(INSTRUMENTS);
     }
 
     // Отображение по цвету (интсрументы)
-    get instrumentsColor () {                  
+    get instrumentsColor() {
         return By.xpath(INSTRUMENTS_COLOR);
     }
 
     // Жёлтый цвет
-    get yellowColor () {                
+    get yellowColor() {
         return By.xpath(YELLOW_COLOR);
     }
 
     // Ссылка на результаты (Types)
-    get typeOfResultTypes () {                
+    get typeOfResultTypes() {
         return By.xpath(RESULT_TYPE_TYPES);
     }
 
     // Настройки
-    get settings () {        
+    get settings() {
         return By.xpath(SETTINGS);
     }
 
     // Настройки -> Язык
-    get settingsLanguage () {           
+    get settingsLanguage() {
         return By.xpath(SETTINGS_LANGUAGE);
     }
 
     // Настройки -> Язык -> Английский
-    get languageEnglish () {         
+    get languageEnglish() {
         return By.xpath(LANGUAGE_ENGLISH);
     }
 
     //  Настройки -> Кнопка "Save"
-    get settingsSaveButton () {                  
+    get settingsSaveButton() {
         return By.xpath(SETTINGS_SAVE_BUTTON);
     }
 
     // Types -> Раздел "Breeds"
-    get catBreeds () {                   
+    get catBreeds() {
         return By.xpath(CAT_BREEDS);
     }
-    
+
     // Список пород в разделе Breeds
-    get typeBreed () {                   
+    get typeBreed() {
         return By.xpath(TYPE_BREEDS);
     }
 
     // Выбор языка
-    get selectLanguage () {                   
+    get selectLanguage() {
         return By.xpath(SELECT_LANGUAGE);
     }
 
     // Back button
-    get settingBackButton () {                   
+    get settingBackButton() {
         return By.xpath(SETTINGS_BACK_BUTTON);
-    }    
+    }
 
-//----------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     // Получение количества отображаемых результатов
-    async resultStats () {          
+    async resultStats() {
         await this.waitUntilElementIsVisible(this.numberOfResults, 3000)
         return await this.getText(this.numberOfResults);
     };
 
-    async nameOfLinks (text) {
-        await this.expectToHaveTextContaining(this.resultLinks, text);
+    async nameOfLinks(text) {
+        await this.expectElementsToHaveTextContaining(this.resultLinks, text);
     };
 
+    async newResultsSearch(value) {
+        await this.cleanField(this.textArea);
+        await this.fillInValueAndClickEnter(this.textArea, value);
+    };
 
+    async openWikipediaLink () {
+        await this.click(this.oneResultLink);
+    };
+
+    async selectingTypeImages() {
+        await this.click(this.typeOfResultImages);
+    };
+
+    async selectingImageParameters () {   
+        await this.click(this.additionalParametersTabby);
+    };
+
+    async imagesLabels (text) {    
+        await this.expectElementsToHaveTextContaining(this.imageName, text);
+    };
+
+    async addValueToSearch (value) {
+        await this.fillInValueAndClickEnter(this.textArea, value);
+    };
+
+    async selectYellowColor(value) {
+        await this.click(this.instruments);
+        await this.click(this.instrumentsColor);
+        await this.click(this.yellowColor);
+        await this.expectToBeEqual(this.instrumentsColor, value);
+    };
+
+    async searchByImage () {        
+        let x = await this.getAttribute(this.imageLocation);
+        await this.click(this.searchingByImage);
+        console.log(x);
+        await this.waitUntilElementIsVisible(this.fieldForSearchingByImage, 3000)
+        await this.fillInValueAndClickEnter(this.fieldForSearchingByImage, x);
+    }
 
 
 
@@ -174,3 +212,9 @@ class Results extends Page {
 };
 
 module.exports = new Results();
+
+
+// // var timestamp = new Date().getTime();
+
+// console.log(timestamp)
+// // 1660926192826

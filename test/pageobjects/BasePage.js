@@ -35,16 +35,49 @@ module.exports = class Page {
     };
 
 
-    async expectToHaveTextContaining(locator, expectedText) {
+    async expectElementsToHaveTextContaining(locator, expectedText) {
 
         let elements = await driver.findElements(locator);
         for (let e of elements) {
             var results = await e.getText();
+            if (results == '') {
+                await expect(results).to.not.include(expectedText);
+            } else {
+                await expect(results.toUpperCase()).to.include(expectedText);
+            }
             console.log(results);
-        }
+        };
 
-        // await expect(results).to.be.include(expectedText);
-    }
+    };
+
+    async cleanField(locator) {
+        await driver.findElement(locator).clear();
+    };
+
+    async click(locator) {
+        await driver.findElement(locator).click();
+    };
+
+    async scrollIntoView(locator) {
+        const element = await driver.findElement(locator);
+        await driver.actions()
+            .scroll(0, 0, 0, 0, element)
+            .perform();
+    };
+
+    async expectToBeEqual(locator, expectedText) {
+        const actualText = await driver.findElement(locator).getText();
+        await expect(actualText).to.equal(expectedText);
+    };
+
+    async getAttribute(locator, attributeName) {
+        return await driver.findElement(locator).getAttribute("src");
+
+    };
+
+
+
+
 };
 
 
