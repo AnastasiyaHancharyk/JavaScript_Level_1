@@ -170,7 +170,7 @@ class Results extends Page {
         await this.fillInValueAndClickEnter(this.textArea, value);
     };
 
-    async openWikipediaLink () {
+    async openWikipediaLink() {
         await this.click(this.oneResultLink);
     };
 
@@ -178,15 +178,15 @@ class Results extends Page {
         await this.click(this.typeOfResultImages);
     };
 
-    async selectingImageParameters () {   
+    async selectingImageParameters() {
         await this.click(this.additionalParametersTabby);
     };
 
-    async imagesLabels (text) {    
+    async imagesLabels(text) {
         await this.expectElementsToHaveTextContaining(this.imageName, text);
     };
 
-    async addValueToSearch (value) {
+    async addValueToSearch(value) {
         await this.fillInValueAndClickEnter(this.textArea, value);
     };
 
@@ -197,14 +197,45 @@ class Results extends Page {
         await this.expectToBeEqual(this.instrumentsColor, value);
     };
 
-    async searchByImage () {        
-        let x = await this.getAttribute(this.imageLocation);
+    async searchByImage() {
+        let x = await this.getAttribute(this.imageLocation, "src");
         await this.click(this.searchingByImage);
         console.log(x);
         await this.waitUntilElementIsVisible(this.fieldForSearchingByImage, 3000)
         await this.fillInValueAndClickEnter(this.fieldForSearchingByImage, x);
-    }
+        await this.sleep(3000);
+        await this.currentURLincludesExpected('lens.google.com');
 
+    };
+
+
+    async changeLanguageToEnglish() {
+        await this.click(this.settings);
+        await this.sleep(300);
+        await this.click(this.settingsLanguage);
+        await this.click(this.selectLanguage);
+        await this.click(this.languageEnglish);
+        await this.click(this.settingsSaveButton);
+        await this.sleep(300);
+        await this.click(this.settingBackButton);
+    };
+
+    async selectingTypeTypes() {
+        await this.click(this.typeOfResultTypes);
+    };
+
+    async selectACatBreed () {
+        await this.sleep(300);
+        let x = await this.getText(this.catBreeds);
+        await this.click(this.catBreeds);
+        let y = await this.getText(this.textArea);
+        console.log("Cat breed: " + x + ". Found cat breed: " + y + ".");
+        if (x === y) {
+            console.log ("Everything is correct! The selected breed matches the found one!");
+        } else {
+            console.log ("Something is wrong... The selected breed does not match the found one :(");
+        }
+    };
 
 
 

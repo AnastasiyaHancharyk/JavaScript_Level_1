@@ -12,7 +12,7 @@ module.exports = class Page {
     };
 
     async fillInValueAndClickEnter(locator, value) {
-        await driver.findElement(locator).sendKeys(value, Key.RETURN);
+        await driver.findElement(locator).sendKeys(value, Key.ENTER);
     };
 
     async closeBrowser() {
@@ -71,8 +71,18 @@ module.exports = class Page {
     };
 
     async getAttribute(locator, attributeName) {
-        return await driver.findElement(locator).getAttribute("src");
+        return await driver.findElement(locator).getAttribute(attributeName);
 
+    };
+
+    async currentURLincludesExpected(expectedURL) {
+        let actualURL = await driver.getCurrentUrl();
+        await expect(actualURL).to.include(expectedURL);
+
+    };
+
+    async sleep (time) {
+        await driver.sleep(time);
     };
 
 
