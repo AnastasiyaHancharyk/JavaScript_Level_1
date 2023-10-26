@@ -1,7 +1,7 @@
 {
   "name": "javascript_level_1",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000J\u0000a\u0000v\u0000a\u0000S\u0000c\u0000r\u0000i\u0000p\u0000t\u0000_\u0000L\u0000e\u0000v\u0000e\u0000l\u0000_\u00001\u0000\r\u0000 \u0000",
+  "description": "JavaScript_Level_1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
