@@ -8,8 +8,8 @@
 */ 
 
 
-const Search = require('../pageobjects/searching')
-const Results = require('../pageobjects/results.page')
+const Search = require('../../pageobjects/google/searching')
+const Results = require('../../pageobjects/google/results.page')
 
 describe('Web Automation Level 1', () => {
     it('Fifth Case', async () => {
