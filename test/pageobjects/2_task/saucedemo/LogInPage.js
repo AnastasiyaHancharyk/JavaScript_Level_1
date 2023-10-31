@@ -1,14 +1,14 @@
-import BasePage from "../BasePage"
+import BasePage from "../BasePage.js"
 
-const USERNAME_FIELD = ''
-const PASSWORD_FIELD = ''
-const LOGIN_BUTTON = ''
-const ERROR_MESSAGE_CONTAINER = ''
+const USERNAME_FIELD = '//*[@id="user-name"]'
+const PASSWORD_FIELD = '//*[@id="password"]'
+const LOGIN_BUTTON = '//*[@id="login-button"]'
+const ERROR_MESSAGE = '//*[@data-test="error"]'
 
 export default class LogInPage extends BasePage {
 
-    openUrl () {
-        return super.openUrl('');
+    openUrl (url) {
+        return super.openUrl(url);
     }
     
     async enterUsername (username) {
@@ -24,11 +24,13 @@ export default class LogInPage extends BasePage {
     };
 
     async getErrorText () {
-        await this.getText(ERROR_MESSAGE_CONTAINER);
+        let text = await this.getText(ERROR_MESSAGE);
+        return text;
     };
 
-    getPageUrl () {
-        return this.getCurrentPageUrl()
+    async getPageUrl () {
+        let url = await this.getCurrentPageUrl();
+        return url;
       };
 
       

@@ -10,17 +10,17 @@
 7. Log out from the application => User is taken to the log in page
 */
 
-import LogInPage from "../../pageobjects/2_task/saucedemo/LogInPage";
-import ProductsPage from "../../pageobjects/2_task/saucedemo/ProductsPage";
+import LogInPage from "../../pageobjects/2_task/saucedemo/LogInPage.js";
+import ProductsPage from "../../pageobjects/2_task/saucedemo/ProductsPage.js";
 import { expect } from 'chai';
 
 const logInPage = new LogInPage();
 const productsPage = new ProductsPage();
 
-describe('Log In scenarios', () => {
+describe('Log In and Log Out scenarios', () => {
 
     beforeEach(() => {
-        logInPage.openUrl();
+       logInPage.openUrl('https://www.saucedemo.com/');
     });
 
     // Verify that the error text is correct

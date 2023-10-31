@@ -26,15 +26,17 @@ export default class BasePage {
     };
 
     async getText(selector) {
-        await $(selector).getText();
+       let text = await $(selector).getText();
+       return text;
     };
 
     async getValue(selector) {
         await $(selector).getValue();
     };
 
-    async getCurrentUrl() {
-        await browser.getUrl();
+    async getCurrentPageUrl() {
+        let url = await browser.getUrl();
+        return url;
     };
 
 
