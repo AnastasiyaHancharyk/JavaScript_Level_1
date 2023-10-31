@@ -1,19 +1,16 @@
 export default class BasePage {
 
-    open(url) {
+    openUrl(url) {
         return browser.url(url)
     };
 
-    async addValue(selector, value) {
-        await $(selector).addValue(value);
+    async setValue(selector, value) {
+        await $(selector).clearValue();
+        await $(selector).setValue(value);
     };
 
     async click(selector) {
         await $(selector).click();
-    };
-
-    async clearValue(selector) {
-        await $(selector).clearValue();
     };
 
     async getAttribute(selector, attributeName) {
@@ -34,6 +31,10 @@ export default class BasePage {
 
     async getValue(selector) {
         await $(selector).getValue();
+    };
+
+    async getCurrentUrl() {
+        await browser.getUrl();
     };
 
 
