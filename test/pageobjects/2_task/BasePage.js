@@ -26,8 +26,8 @@ export default class BasePage {
     };
 
     async getText(selector) {
-       let text = await $(selector).getText();
-       return text;
+        let text = await $(selector).getText();
+        return text;
     };
 
     async getValue(selector) {
@@ -37,6 +37,16 @@ export default class BasePage {
     async getCurrentPageUrl() {
         let url = await browser.getUrl();
         return url;
+    };
+
+    async getNumberofElements(selector) {
+        const numberOfElements = await $$(selector).length;
+        return numberOfElements;
+    };
+
+    async getTexts(selector, numberOfElement) {
+        let texts = await $$(selector)[numberOfElement].getText();
+        return texts;
     };
 
 

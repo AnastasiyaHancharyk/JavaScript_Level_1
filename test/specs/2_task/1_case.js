@@ -20,18 +20,18 @@ const productsPage = new ProductsPage();
 describe('Log In and Log Out scenarios', () => {
 
     beforeEach(() => {
-       logInPage.openUrl('https://www.saucedemo.com/');
+        logInPage.openUrl('https://www.saucedemo.com/');
     });
 
-    // Verify that the error text is correct
+    // Function to verify that the error text is correct
     async function verifyActualErrorTextEqualsExpected(expectedText) {
         let actualErrorText = await logInPage.getErrorText();
         let expectedErrorText = expectedText;
         expect(actualErrorText).to.equal(expectedErrorText);
     };
 
-    // Verify that a user stays on the Log In page
-    async function verifyCurrentPageUrlEqualsExpected(expectedPageUrl){
+    // Function to verify that the url is correct
+    async function verifyCurrentPageUrlEqualsExpected(expectedPageUrl) {
         let currentPageUrl = await logInPage.getPageUrl();
         expect(currentPageUrl).to.equal(expectedPageUrl);
     };
@@ -54,7 +54,7 @@ describe('Log In and Log Out scenarios', () => {
         await logInPage.clickLoginButton();
 
         await verifyActualErrorTextEqualsExpected('Epic sadface: Password is required');
-        
+
         await verifyCurrentPageUrlEqualsExpected('https://www.saucedemo.com/');
 
     });
@@ -91,7 +91,7 @@ describe('Log In and Log Out scenarios', () => {
     });
 
 
-    it('"+" Correct Username + Correct Password', async () => {
+    it('"+" Correct Username + Correct Password + Log Out', async () => {
         await logInPage.enterUsername('standard_user');
         await logInPage.enterPassword('secret_sauce');
         await logInPage.clickLoginButton();
