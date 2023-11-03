@@ -32,9 +32,11 @@ describe('Sorting scenarios', () => {
 
         await verifyCurrentPageUrlEqualsExpected('https://www.saucedemo.com/inventory.html');
 
-        await productsPage.getProductNames('reverse');
+        let x = await productsPage.getProductNames('reverse');
+        let y = await productsPage.getProductNames('original');
+        expect(x).to.have.ordered.members(y);
 
-        await productsPage.getProductPrices('sort');
+        // await productsPage.getProductPrices('reverse');
 
     });
 

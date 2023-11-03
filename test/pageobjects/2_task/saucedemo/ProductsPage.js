@@ -8,9 +8,9 @@ const PRODUCT_PRICE = '//*[@class="inventory_item_price"]';
 const PRODUCT_NAME = '//*[@class="inventory_item_name "]';
 
 /**
-    * Function to create an array and sort it 
+    * Function to create a new array consisting of values 
  */
-async function sortingArrays(selector, sortingType) {
+async function arrayFromValues(selector) {
     const numberOfProducts = await basePage.getNumberofElements(selector);
     let productNumber = 0;
     let newArray = [];
@@ -19,6 +19,29 @@ async function sortingArrays(selector, sortingType) {
         newArray[productNumber] = productName;
         productNumber++;
     };
+    console.log(newArray);
+    return newArray;
+};
+
+async function sortingArraysOfNumbers(array, sortingType) {
+    let newArray = array;
+    if (sortingType === 'reverse') {
+        newArray.sort(function (a, b) {
+            return b - a;
+        });
+    } else if (sortingType === 'sort') {
+        newArray.sort(function (a, b) {
+            return a - b;
+        });
+    } else if (sortingType === 'original') {
+        newArray;
+    };
+    console.log(newArray);
+    return newArray;
+};
+
+async function sortingArraysOfStrings(array, sortingType) {
+    let newArray = array;
     if (sortingType === 'reverse') {
         newArray.reverse();
     } else if (sortingType === 'sort') {
@@ -26,9 +49,9 @@ async function sortingArrays(selector, sortingType) {
     } else if (sortingType === 'original') {
         newArray;
     };
-
+    console.log(newArray);
     return newArray;
-};
+}
 
 export default class ProductsPage extends BasePage {
 
@@ -46,11 +69,13 @@ export default class ProductsPage extends BasePage {
      * @param {string} sortingType - 'reverse' (== .reverse() )  OR  'sort' (== .sort() )  OR  'original' (== no changes).
     */
     async getProductNames(sortingType) {
-        await sortingArrays(PRODUCT_NAME, sortingType);
+        let newArray = await arrayFromValues(PRODUCT_NAME);
+        let x = await sortingArraysOfStrings(newArray, sortingType);
+        return x;
     };
 
     async getProductPrices(sortingType) {
-        const array = await sortingArrays(PRODUCT_PRICE, sortingType);
+        const array = await arrayFromValues(PRODUCT_PRICE);
         for (var i = 0; i < array.length; i++) {
             array[i] = array[i].replace('$', '');
         }
@@ -58,6 +83,7 @@ export default class ProductsPage extends BasePage {
             return parseFloat(str);
         });
         console.log(newArray);
+        await sortingArraysOfNumbers(newArray, sortingType);
     };
 
 }
