@@ -19,25 +19,53 @@ describe('Sorting scenarios', () => {
         logInPage.openUrl('https://www.saucedemo.com/');
     });
 
+    // Function to log into the app and verify that the use is logged in successfully
+    async function logInWithValidCreds() {
+        await logInPage.enterUsername('standard_user');
+        await logInPage.enterPassword('secret_sauce');
+        await logInPage.clickLoginButton();
+        
+        // Verify that the use is logged in successfully be checking the page
+        await verifyCurrentPageUrlEqualsExpected('https://www.saucedemo.com/inventory.html');
+    };
+
     // Function to verify that the url is correct
     async function verifyCurrentPageUrlEqualsExpected(expectedPageUrl) {
         let currentPageUrl = await logInPage.getPageUrl();
         expect(currentPageUrl).to.equal(expectedPageUrl);
     };
 
-    it('"+" Sorting', async () => {
-        await logInPage.enterUsername('standard_user');
-        await logInPage.enterPassword('secret_sauce');
-        await logInPage.clickLoginButton();
+    it('"+" Sorting by Name (A to Z)', async () => {
+        await logInWithValidCreds();
+        let expectedSorting = await productsPage.getProductNames('sort');
+        await productsPage.selectSortingType('A to Z');
+        let currentSorting = await productsPage.getProductNames('original');
+        expect(currentSorting).to.have.ordered.members(expectedSorting);
 
-        await verifyCurrentPageUrlEqualsExpected('https://www.saucedemo.com/inventory.html');
+    });
 
-        let x = await productsPage.getProductNames('reverse');
-        let y = await productsPage.getProductNames('original');
-        expect(x).to.have.ordered.members(y);
+    it('"+" Sorting by Name (Z to A)', async () => {
+        await logInWithValidCreds();
+        let expectedSorting = await productsPage.getProductNames('reverse');
+        await productsPage.selectSortingType('Z to A');
+        let currentSorting = await productsPage.getProductNames('original');
+        expect(currentSorting).to.have.ordered.members(expectedSorting);
+    });
 
-        // await productsPage.getProductPrices('reverse');
+    it('"+" Sorting by Price (low to high)', async () => {
+        await logInWithValidCreds();
+        let expectedSorting = await productsPage.getProductPrices('sort');
+        await productsPage.selectSortingType('Low to High');
+        let currentSorting = await productsPage.getProductPrices('original');
+        expect(currentSorting).to.have.ordered.members(expectedSorting);
+    });
 
+    it('"+" Sorting by Price (high to low)', async () => {
+        await logInWithValidCreds();
+        let expectedSorting = await productsPage.getProductPrices('reverse');
+        await productsPage.selectSortingType('High to Low');
+        let currentSorting = await productsPage.getProductPrices('original');
+        expect(currentSorting).to.have.ordered.members(expectedSorting);
     });
 
 });

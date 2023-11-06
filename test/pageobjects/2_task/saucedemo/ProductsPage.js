@@ -6,24 +6,28 @@ const BURGER_MENU_ICON = '//*[@id="react-burger-menu-btn"]';
 const LOGOUT_BUTTON = '//*[@id="logout_sidebar_link"]';
 const PRODUCT_PRICE = '//*[@class="inventory_item_price"]';
 const PRODUCT_NAME = '//*[@class="inventory_item_name "]';
+const PRODUCT_SORT_DROPDOWN = '//*[@class="product_sort_container"]';
+const SORT_BY_NAME_A_TO_Z = '//*[@value="az"]';
+const SORT_BY_NAME_Z_TO_A = '//*[@value="za"]';
+const SORT_BY_PRICE_LOW_TO_HIGH = '//*[@value="lohi"]';
+const SORT_BY_PRICE_HUGH_TO_LOW = '//*[@value="hilo"]';
 
-/**
-    * Function to create a new array consisting of values 
- */
+// Function to create a new array
 async function arrayFromValues(selector) {
-    const numberOfProducts = await basePage.getNumberofElements(selector);
-    let productNumber = 0;
+    const numberOfItems = await basePage.getNumberofElements(selector);
+    let elementNumber = 0;
     let newArray = [];
-    while (productNumber < numberOfProducts) {
-        let productName = await basePage.getTexts(selector, productNumber);
-        newArray[productNumber] = productName;
-        productNumber++;
+    while (elementNumber < numberOfItems) {
+        let elementName = await basePage.getTexts(selector, elementNumber);
+        newArray[elementNumber] = elementName;
+        elementNumber++;
     };
     console.log(newArray);
     return newArray;
 };
 
-async function sortingArraysOfNumbers(array, sortingType) {
+// Function to sort an array of numbers
+async function sortingArrayOfNumbers(array, sortingType) {
     let newArray = array;
     if (sortingType === 'reverse') {
         newArray.sort(function (a, b) {
@@ -40,7 +44,8 @@ async function sortingArraysOfNumbers(array, sortingType) {
     return newArray;
 };
 
-async function sortingArraysOfStrings(array, sortingType) {
+// Function to sort an array of strings
+async function sortingArrayOfStrings(array, sortingType) {
     let newArray = array;
     if (sortingType === 'reverse') {
         newArray.reverse();
@@ -51,7 +56,7 @@ async function sortingArraysOfStrings(array, sortingType) {
     };
     console.log(newArray);
     return newArray;
-}
+};
 
 export default class ProductsPage extends BasePage {
 
@@ -65,15 +70,19 @@ export default class ProductsPage extends BasePage {
 
 
     /**
-     * Function to get names of Products
+     * Function to get products' names
      * @param {string} sortingType - 'reverse' (== .reverse() )  OR  'sort' (== .sort() )  OR  'original' (== no changes).
     */
     async getProductNames(sortingType) {
         let newArray = await arrayFromValues(PRODUCT_NAME);
-        let x = await sortingArraysOfStrings(newArray, sortingType);
+        let x = await sortingArrayOfStrings(newArray, sortingType);
         return x;
     };
 
+    /**
+     * Function to get products' prices
+     * @param {string} sortingType - 'reverse'  OR  'sort'  OR  'original' (== no changes).
+    */
     async getProductPrices(sortingType) {
         const array = await arrayFromValues(PRODUCT_PRICE);
         for (var i = 0; i < array.length; i++) {
@@ -83,7 +92,26 @@ export default class ProductsPage extends BasePage {
             return parseFloat(str);
         });
         console.log(newArray);
-        await sortingArraysOfNumbers(newArray, sortingType);
+        let x = await sortingArrayOfNumbers(newArray, sortingType);
+        return x;
+    };
+
+    /**
+    * Function to get products' prices
+    * @param {string} sortingType - 'A to Z'  OR  'Z to A'  OR  'Low to High'  OR  'High to Low'.
+    */
+    async selectSortingType(sortingType) {
+        await this.click(PRODUCT_SORT_DROPDOWN);
+        let selectedType = sortingType;
+        if (selectedType === 'A to Z') {
+            await this.click(SORT_BY_NAME_A_TO_Z);
+        } else if (selectedType === 'Z to A') {
+            await this.click(SORT_BY_NAME_Z_TO_A);
+        } else if (selectedType === 'Low to High') {
+            await this.click(SORT_BY_PRICE_LOW_TO_HIGH);
+        } else if (selectedType === 'High to Low') {
+            await this.click(SORT_BY_PRICE_HUGH_TO_LOW);
+        };
     };
 
 }
