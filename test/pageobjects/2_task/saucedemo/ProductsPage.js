@@ -11,6 +11,10 @@ const SORT_BY_NAME_A_TO_Z = '//*[@value="az"]';
 const SORT_BY_NAME_Z_TO_A = '//*[@value="za"]';
 const SORT_BY_PRICE_LOW_TO_HIGH = '//*[@value="lohi"]';
 const SORT_BY_PRICE_HUGH_TO_LOW = '//*[@value="hilo"]';
+const ADD_REMOVE_BUTTON = '//*[contains(@class, "btn")]';
+const SHOPPING_CART_ICON = '//*[@id="shopping_cart_container"]';
+
+
 
 // Function to create a new array
 async function arrayFromValues(selector) {
@@ -66,6 +70,15 @@ export default class ProductsPage extends BasePage {
 
     async clickLogOutButton() {
         await this.click(LOGOUT_BUTTON);
+    };
+
+    async clickProductButton () {
+        await this.click(ADD_REMOVE_BUTTON);
+    };
+
+    async getProductButtonText () {
+        let text = await this.getText(ADD_REMOVE_BUTTON);
+        return text;
     };
 
 

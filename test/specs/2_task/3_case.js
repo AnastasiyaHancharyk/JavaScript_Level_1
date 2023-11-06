@@ -1,9 +1,9 @@
-// Sorting
 /*
 1. Log in to the application => Verify that a user is on the /inventory page
-2. Sort the Products by Price => Verify that the sorting is correct by checking the first product
-3. Sort the Products by Name => Verify that the sorting is correct by checking the first product
-Array?
+2. Sort the Products by Name (A to Z) => Verify that the sorting is correct
+3. Sort the Products by Name (Z to A) => Verify that the sorting is correct
+4. Sort the Products by Price (Low to High)=> Verify that the sorting is correct
+5. Sort the Products by Price (High to Low)=> Verify that the sorting is correct
 */
 
 import LogInPage from "../../pageobjects/2_task/saucedemo/LogInPage.js";
@@ -52,7 +52,7 @@ describe('Sorting scenarios', () => {
         expect(currentSorting).to.have.ordered.members(expectedSorting);
     });
 
-    it('"+" Sorting by Price (low to high)', async () => {
+    it('"+" Sorting by Price (Low to High)', async () => {
         await logInWithValidCreds();
         let expectedSorting = await productsPage.getProductPrices('sort');
         await productsPage.selectSortingType('Low to High');
@@ -60,7 +60,7 @@ describe('Sorting scenarios', () => {
         expect(currentSorting).to.have.ordered.members(expectedSorting);
     });
 
-    it('"+" Sorting by Price (high to low)', async () => {
+    it('"+" Sorting by Price (High to Low)', async () => {
         await logInWithValidCreds();
         let expectedSorting = await productsPage.getProductPrices('reverse');
         await productsPage.selectSortingType('High to Low');
