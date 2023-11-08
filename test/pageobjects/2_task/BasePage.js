@@ -13,6 +13,10 @@ export default class BasePage {
         await $(selector).click();
     };
 
+    async clickNumber(selector, numberOfElement) {
+        await $$(selector)[numberOfElement].click();
+    };
+
     async getAttribute(selector, attributeName) {
         await $(selector).getAttribute(attributeName);
     };

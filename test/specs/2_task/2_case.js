@@ -42,7 +42,7 @@ describe('Checkout Out scenarios', () => {
     };
 
 
-    it('"+" User is checked out successfully', async () => {
+    it('"+" Button text is changed when clicking on it', async () => {
         await logInWithValidCreds();
         let addToCart = await productsPage.getProductButtonText();
         expect(addToCart).to.equal('Add to cart');
@@ -50,5 +50,14 @@ describe('Checkout Out scenarios', () => {
         let remove = await productsPage.getProductButtonText();
         expect(remove).to.equal('Remove');
     });
+
+    it.only('"+" Button text is changed when clicking on it', async () => {
+        await logInWithValidCreds();
+        await productsPage.addProductToCart([1, 2, 3]);
+        await browser.pause(3000);
+        await productsPage.clickCartIcon();
+        await browser.pause(3000);
+    });
+
 
 });

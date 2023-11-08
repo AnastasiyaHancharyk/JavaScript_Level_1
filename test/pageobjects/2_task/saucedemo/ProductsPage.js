@@ -72,11 +72,11 @@ export default class ProductsPage extends BasePage {
         await this.click(LOGOUT_BUTTON);
     };
 
-    async clickProductButton () {
+    async clickProductButton() {
         await this.click(ADD_REMOVE_BUTTON);
     };
 
-    async getProductButtonText () {
+    async getProductButtonText() {
         let text = await this.getText(ADD_REMOVE_BUTTON);
         return text;
     };
@@ -125,6 +125,25 @@ export default class ProductsPage extends BasePage {
         } else if (selectedType === 'High to Low') {
             await this.click(SORT_BY_PRICE_HUGH_TO_LOW);
         };
+    };
+
+    async addProductToCart(productNumbers) {
+        let array = productNumbers;
+        let i = 0;
+        let newArray = [];
+        while (i < array.length) {
+            let elementNumber = array[i];
+            await basePage.clickNumber(ADD_REMOVE_BUTTON, elementNumber);
+            let elementName = await basePage.getTexts(PRODUCT_NAME, elementNumber);
+            newArray[elementNumber] = elementName;
+            i++;
+        };
+        console.log(newArray);
+        return newArray;
+    };
+
+    async clickCartIcon() {
+        await basePage.click(SHOPPING_CART_ICON);
     };
 
 }
