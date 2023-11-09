@@ -12,7 +12,7 @@ const SORT_BY_NAME_Z_TO_A = '//*[@value="za"]';
 const SORT_BY_PRICE_LOW_TO_HIGH = '//*[@value="lohi"]';
 const SORT_BY_PRICE_HUGH_TO_LOW = '//*[@value="hilo"]';
 const ADD_REMOVE_BUTTON = '//*[contains(@class, "btn")]';
-const SHOPPING_CART_ICON = '//*[@id="shopping_cart_container"]';
+const SHOPPING_CART_ICON = '//*[@class="shopping_cart_badge"]';
 
 
 
@@ -59,6 +59,17 @@ async function sortingArrayOfStrings(array, sortingType) {
         newArray;
     };
     console.log(newArray);
+    return newArray;
+};
+
+// Function to change a price from string to number
+async function changeStringToNumber(array) {
+    for (var i = 0; i < array.length; i++) {
+        array[i] = array[i].replace('$', '');
+    }
+    let newArray = array.map(str => {
+        return parseFloat(str);
+    });
     return newArray;
 };
 
@@ -127,23 +138,43 @@ export default class ProductsPage extends BasePage {
         };
     };
 
-    async addProductToCart(productNumbers) {
+    async addProductsToCart(productNumbers) {
         let array = productNumbers;
         let i = 0;
-        let newArray = [];
+        const productArray = [];
+        const priceArray = [];
+        
+        // Create an array from added items
         while (i < array.length) {
             let elementNumber = array[i];
             await basePage.clickNumber(ADD_REMOVE_BUTTON, elementNumber);
             let elementName = await basePage.getTexts(PRODUCT_NAME, elementNumber);
-            newArray[elementNumber] = elementName;
+            let elementPrice = await basePage.getTexts(PRODUCT_PRICE, elementNumber);
+            priceArray[elementNumber] = elementPrice;
+            productArray[elementNumber] = elementName;
             i++;
         };
-        console.log(newArray);
-        return newArray;
+
+        // Remove empty elements from an array 
+        let filteredPrices = priceArray.filter((a) => a);
+        let filteredProducts = productArray.filter((a) => a);
+
+        // Change array items from string to numbers
+        let filteredPricesNumbers = await changeStringToNumber(filteredPrices);
+
+        // Get array's length
+        let numberOfProducts = filteredProducts.length;
+
+        return {filteredPricesNumbers, filteredProducts, numberOfProducts};
     };
 
     async clickCartIcon() {
         await basePage.click(SHOPPING_CART_ICON);
     };
 
-}
+    async cartNumberOfItems () {
+        let numberOfItems = await basePage.getText(SHOPPING_CART_ICON);
+        return numberOfItems;
+    }
+
+};

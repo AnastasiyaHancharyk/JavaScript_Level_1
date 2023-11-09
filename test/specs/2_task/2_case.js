@@ -1,8 +1,8 @@
 /* 
 1. Log in to the app => User is taken to the "/inventory" page.
-2. On the /inventory page, click on the "Add to cart" button => The button is changed to the "Remove" button
-3. Add several items to the cart => The number of added items is shown on the cart icon;
-4. Click on the cart icon => User is taken to the "/cart" page AND the added items correspond the ones shown in the cart.
+2. On the /inventory page, click on the "Add to cart" button => The button is changed to "Remove"
+3. Add several items to the cart => The number of added items is shown next to the cart icon;
+4. Click on the cart icon => User is taken to the "/cart" page AND the added items correspond to the ones shown in the cart.
 5. Click on the "Checkout" button => "/checkout-step-one.html" page is shown;
 6. Fill in the fields;
 7. Click on the "Continue" button => "/checkout-step-two.html" page is shown;
@@ -12,12 +12,14 @@
 11. Click on the Finish button;
 */
 
+import CartPage from "../../pageobjects/2_task/saucedemo/CartPage.js";
 import LogInPage from "../../pageobjects/2_task/saucedemo/LogInPage.js";
 import ProductsPage from "../../pageobjects/2_task/saucedemo/ProductsPage.js";
 import { expect } from 'chai';
 
 const logInPage = new LogInPage();
 const productsPage = new ProductsPage();
+const cartPage = new CartPage();
 
 describe('Checkout Out scenarios', () => {
 
@@ -51,13 +53,25 @@ describe('Checkout Out scenarios', () => {
         expect(remove).to.equal('Remove');
     });
 
-    it.only('"+" Button text is changed when clicking on it', async () => {
+    it('"+" Number of added items matches the number displayed next to the cart icon', async () => {
         await logInWithValidCreds();
-        await productsPage.addProductToCart([1, 2, 3]);
+        let addedProducts = await productsPage.addProductsToCart([5, 0, 3, 4]);
+        let numberOfAddedProducts = addedProducts.numberOfProducts.toString();
+        let numberShownOnCartIcon = await productsPage.cartNumberOfItems();
+        expect(numberOfAddedProducts).to.equal(numberShownOnCartIcon);
+    });
+
+    it.only('"+" Added products are displayed correctly during the checkout', async () => {
+        await logInWithValidCreds();
+        let addedProducts = await productsPage.addProductsToCart([5, 0, 3, 4]);
         await browser.pause(3000);
         await productsPage.clickCartIcon();
-        await browser.pause(3000);
+        await verifyCurrentPageUrlEqualsExpected('https://www.saucedemo.com/cart.html');
+        
+
     });
+
+
 
 
 });
