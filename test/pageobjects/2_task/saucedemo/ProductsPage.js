@@ -15,64 +15,6 @@ const ADD_REMOVE_BUTTON = '//*[contains(@class, "btn")]';
 const SHOPPING_CART_ICON = '//*[@class="shopping_cart_badge"]';
 
 
-
-// Function to create a new array
-async function arrayFromValues(selector) {
-    const numberOfItems = await basePage.getNumberofElements(selector);
-    let elementNumber = 0;
-    let newArray = [];
-    while (elementNumber < numberOfItems) {
-        let elementName = await basePage.getTexts(selector, elementNumber);
-        newArray[elementNumber] = elementName;
-        elementNumber++;
-    };
-    console.log(newArray);
-    return newArray;
-};
-
-// Function to sort an array of numbers
-async function sortingArrayOfNumbers(array, sortingType) {
-    let newArray = array;
-    if (sortingType === 'reverse') {
-        newArray.sort(function (a, b) {
-            return b - a;
-        });
-    } else if (sortingType === 'sort') {
-        newArray.sort(function (a, b) {
-            return a - b;
-        });
-    } else if (sortingType === 'original') {
-        newArray;
-    };
-    console.log(newArray);
-    return newArray;
-};
-
-// Function to sort an array of strings
-async function sortingArrayOfStrings(array, sortingType) {
-    let newArray = array;
-    if (sortingType === 'reverse') {
-        newArray.reverse();
-    } else if (sortingType === 'sort') {
-        newArray.sort();
-    } else if (sortingType === 'original') {
-        newArray;
-    };
-    console.log(newArray);
-    return newArray;
-};
-
-// Function to change a price from string to number
-async function changeStringToNumber(array) {
-    for (var i = 0; i < array.length; i++) {
-        array[i] = array[i].replace('$', '');
-    }
-    let newArray = array.map(str => {
-        return parseFloat(str);
-    });
-    return newArray;
-};
-
 export default class ProductsPage extends BasePage {
 
     async openHamburgerMenu() {
@@ -94,21 +36,21 @@ export default class ProductsPage extends BasePage {
 
 
     /**
-     * Function to get products' names
+     * Function to get products' name
      * @param {string} sortingType - 'reverse' (== .reverse() )  OR  'sort' (== .sort() )  OR  'original' (== no changes).
     */
     async getProductNames(sortingType) {
-        let newArray = await arrayFromValues(PRODUCT_NAME);
-        let x = await sortingArrayOfStrings(newArray, sortingType);
+        let newArray = await this.createArrayFromValues(PRODUCT_NAME);
+        let x = await this.sortingArrayOfStrings(newArray, sortingType);
         return x;
     };
 
     /**
-     * Function to get products' prices
+     * Function to get products' price
      * @param {string} sortingType - 'reverse'  OR  'sort'  OR  'original' (== no changes).
     */
     async getProductPrices(sortingType) {
-        const array = await arrayFromValues(PRODUCT_PRICE);
+        const array = await this.createArrayFromValues(PRODUCT_PRICE);
         for (var i = 0; i < array.length; i++) {
             array[i] = array[i].replace('$', '');
         }
@@ -116,12 +58,12 @@ export default class ProductsPage extends BasePage {
             return parseFloat(str);
         });
         console.log(newArray);
-        let x = await sortingArrayOfNumbers(newArray, sortingType);
+        let x = await this.sortingArrayOfNumbers(newArray, sortingType);
         return x;
     };
 
     /**
-    * Function to get products' prices
+    * Function to select sorting type
     * @param {string} sortingType - 'A to Z'  OR  'Z to A'  OR  'Low to High'  OR  'High to Low'.
     */
     async selectSortingType(sortingType) {
@@ -157,15 +99,18 @@ export default class ProductsPage extends BasePage {
 
         // Remove empty elements from an array 
         let filteredPrices = priceArray.filter((a) => a);
-        let filteredProducts = productArray.filter((a) => a);
+        let name = productArray.filter((a) => a);
 
         // Change array items from string to numbers
-        let filteredPricesNumbers = await changeStringToNumber(filteredPrices);
+        let price = await this.changeArrayStringToNumber(filteredPrices, '$');
 
         // Get array's length
-        let numberOfProducts = filteredProducts.length;
+        let numberOfProducts = name.length;
 
-        return {filteredPricesNumbers, filteredProducts, numberOfProducts};
+        // Get price sum
+        let priceSum = price.reduce((partialSum, a) => partialSum + a, 0);
+
+        return {price, name, numberOfProducts, priceSum};
     };
 
     async clickCartIcon() {
