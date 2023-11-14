@@ -5,6 +5,7 @@ export default class BasePage {
     };
 
     async setValue(selector, value) {
+        await $(selector).waitForExist();
         await $(selector).clearValue();
         await $(selector).setValue(value);
     };
@@ -52,6 +53,10 @@ export default class BasePage {
         let texts = await $$(selector)[numberOfElement].getText();
         return texts;
     };
+
+    async selectByVisibleText (selector, text) {
+        await $(selector).selectByVisibleText(text);
+    }
 
     // Function to create a new array
     async createArrayFromValues(selector) {

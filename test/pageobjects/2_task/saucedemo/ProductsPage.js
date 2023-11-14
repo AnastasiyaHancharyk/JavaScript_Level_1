@@ -1,7 +1,5 @@
 import BasePage from "../BasePage.js"
 
-const basePage = new BasePage();
-
 const BURGER_MENU_ICON = '//*[@id="react-burger-menu-btn"]';
 const LOGOUT_BUTTON = '//*[@id="logout_sidebar_link"]';
 const PRODUCT_PRICE = '//*[@class="inventory_item_price"]';
@@ -89,9 +87,9 @@ export default class ProductsPage extends BasePage {
         // Create an array from added items
         while (i < array.length) {
             let elementNumber = array[i];
-            await basePage.clickNumber(ADD_REMOVE_BUTTON, elementNumber);
-            let elementName = await basePage.getTexts(PRODUCT_NAME, elementNumber);
-            let elementPrice = await basePage.getTexts(PRODUCT_PRICE, elementNumber);
+            await this.clickNumber(ADD_REMOVE_BUTTON, elementNumber);
+            let elementName = await this.getTexts(PRODUCT_NAME, elementNumber);
+            let elementPrice = await this.getTexts(PRODUCT_PRICE, elementNumber);
             priceArray[elementNumber] = elementPrice;
             productArray[elementNumber] = elementName;
             i++;
@@ -114,11 +112,11 @@ export default class ProductsPage extends BasePage {
     };
 
     async clickCartIcon() {
-        await basePage.click(SHOPPING_CART_ICON);
+        await this.click(SHOPPING_CART_ICON);
     };
 
     async cartNumberOfItems () {
-        let numberOfItems = await basePage.getText(SHOPPING_CART_ICON);
+        let numberOfItems = await this.getText(SHOPPING_CART_ICON);
         return numberOfItems;
     }
 
