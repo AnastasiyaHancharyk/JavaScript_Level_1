@@ -18,6 +18,26 @@ export default class BasePage {
         await $$(selector)[numberOfElement].click();
     };
 
+    async clickByText(selector, value) {
+        let numberOfElement = 0;
+        let numberOfItems = await this.getNumberOfElements(selector);
+        let text = await this.getTexts(selector, numberOfElement);
+        
+        console.log(value);
+        console.log(text);
+        console.log(numberOfItems);
+
+        while (numberOfElement < numberOfItems) {
+            // if (text === value) {
+                await $$(selector)[numberOfElement].click(); 
+            // } else {
+                
+            //     await this.clickByText(selector, value);
+            // };
+            numberOfElement++;
+        };
+    };
+
     async getAttribute(selector, attributeName) {
         await $(selector).getAttribute(attributeName);
     };
@@ -54,7 +74,7 @@ export default class BasePage {
         return texts;
     };
 
-    async selectByVisibleText (selector, text) {
+    async selectByVisibleText(selector, text) {
         await $(selector).selectByVisibleText(text);
     }
 

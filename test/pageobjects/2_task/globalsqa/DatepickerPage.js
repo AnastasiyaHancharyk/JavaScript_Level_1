@@ -27,7 +27,8 @@ export default class DatepickerPage extends BasePage {
             await this.click(NEXT_BUTTON);
             await this.selectDayFromToday(numberOfDays);
         } else {
-            
+            await this.clickByText(DAY_CELL, dayString);
+            // console.log(dayString)
         }
 
         return dateToSet;
