@@ -14,7 +14,7 @@ export default class BasePage {
         await $(selector).click();
     };
 
-    async clickNumber(selector, numberOfElement) {
+    async clickProductNumber(selector, numberOfElement) {
         await $$(selector)[numberOfElement].click();
     };
 
@@ -124,11 +124,17 @@ export default class BasePage {
         return newArray;
     };
 
-    // Function to change a price from string to number
-    async changeArrayStringToNumber(array, replacedValue) {
+    // Function to remove a value that is present in all elements
+    async removeCommonValueFromAllArrayElements(array, valueToRemove) {
+        let newArray = array;
         for (var i = 0; i < array.length; i++) {
-            array[i] = array[i].replace(replacedValue, '');
+            array[i] = array[i].replace(valueToRemove, '');
         }
+        return newArray;
+    };
+
+    // Function to change an array from string to number
+    async changeArrayStringToNumber(array) {
         let newArray = array.map(str => {
             return parseFloat(str);
         });

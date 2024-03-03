@@ -87,7 +87,7 @@ export default class ProductsPage extends BasePage {
         // Create an array from added items
         while (i < array.length) {
             let elementNumber = array[i];
-            await this.clickNumber(ADD_REMOVE_BUTTON, elementNumber);
+            await this.clickProductNumber(ADD_REMOVE_BUTTON, elementNumber);
             let elementName = await this.getTexts(PRODUCT_NAME, elementNumber);
             let elementPrice = await this.getTexts(PRODUCT_PRICE, elementNumber);
             priceArray[elementNumber] = elementPrice;
@@ -95,20 +95,22 @@ export default class ProductsPage extends BasePage {
             i++;
         };
 
-        // Remove empty elements from an array 
-        let filteredPrices = priceArray.filter((a) => a);
-        let name = productArray.filter((a) => a);
+        let priceString = priceArray;
+        let productName = productArray;
 
-        // Change array items from string to numbers
-        let price = await this.changeArrayStringToNumber(filteredPrices, '$');
+        // Change price array items from string to numbers
+        let priceWithout$ = await this.removeCommonValueFromAllArrayElements(priceString, '$');
+        let priceNumber = await this.changeArrayStringToNumber(priceWithout$);
 
         // Get array's length
-        let numberOfProducts = name.length;
+        let numberOfProducts = productName.length;
 
         // Get price sum
-        let priceSum = price.reduce((partialSum, a) => partialSum + a, 0);
+        let priceSum = priceNumber.reduce(function (a, b) {
+            return a + b;
+        });
 
-        return {price, name, numberOfProducts, priceSum};
+        return {productName, numberOfProducts, priceSum};
     };
 
     async clickCartIcon() {

@@ -37,7 +37,7 @@ describe('Log In and Log Out scenarios', () => {
     };
 
 
-    it('"-" Username is left blank + Correct Password', async () => {
+    it('"-" Username is left blank + Filled in Password', async () => {
         await logInPage.enterUsername('');
         await logInPage.enterPassword('secret_sauce');
         await logInPage.clickLoginButton();
@@ -48,7 +48,7 @@ describe('Log In and Log Out scenarios', () => {
 
     });
 
-    it('"-" Password is left blank + Correct Username', async () => {
+    it('"-" Password is left blank + Filled in Username', async () => {
         await logInPage.enterUsername('standard_user');
         await logInPage.enterPassword('');
         await logInPage.clickLoginButton();

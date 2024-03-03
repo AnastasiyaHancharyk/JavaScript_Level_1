@@ -19,7 +19,7 @@ export default class DatepickerPage extends BasePage {
         let dayInt = date.getDate();
         let monthInt = date.getMonth();
         let dateToSet = monthInt + '/' + dayInt + '/' + date.getFullYear();
-
+   
         let dayString = dayInt.toString();
         let monthString = date.toLocaleString('default', { month: 'long' });
         let currentMonthName = await this.getText(MONTH_NAME);
