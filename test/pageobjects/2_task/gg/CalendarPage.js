@@ -1,5 +1,8 @@
-// const loopTime = 9
+import BasePage from "../BasePage.js"
 
-// for (let i = 0; i < loopTime; i++) {
-//     console.log(`Iteration is #${i}`)
-// }
+const NEXT_MONTH_BUTTON = '//*[@name="next-month"]';
+const NEXT_BUTTON = '//*[@type="submit"]';
+const DAY_CELL = '//*[@class="style_cell__xvL7z"]';
+const APPT_DETAILS = '//*[@class="AppointmentInfo_infoItem__fdYSU"]';
+
+
