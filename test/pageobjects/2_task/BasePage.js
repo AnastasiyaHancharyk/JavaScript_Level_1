@@ -5,37 +5,37 @@ export default class BasePage {
     };
 
     async setValue(selector, value) {
-        await $(selector).waitForExist();
+        await $(selector).waitForExist({ timeout: 5000 });
         await $(selector).clearValue();
         await $(selector).setValue(value);
     };
 
     async click(selector) {
+        await $(selector).waitForClickable({ timeout: 5000 });
         await $(selector).click();
     };
 
-    async clickProductNumber(selector, numberOfElement) {
+    async clickItemNumber(selector, numberOfElement) {
         await $$(selector)[numberOfElement].click();
     };
 
     async clickByText(selector, value) {
         let numberOfElement = 0;
-        let numberOfItems = await this.getNumberOfElements(selector);
         let text = await this.getTexts(selector, numberOfElement);
-        
-        console.log(value);
-        console.log(text);
-        console.log(numberOfItems);
 
-        while (numberOfElement < numberOfItems) {
-            // if (text === value) {
-                await $$(selector)[numberOfElement].click(); 
-            // } else {
-                
-            //     await this.clickByText(selector, value);
-            // };
+        // console.log(value);
+        // console.log(text);
+        // console.log(numberOfItems);
+
+
+        if (text === value) {
+            await $$(selector)[numberOfElement].click();
+        } else if (text != value) {
             numberOfElement++;
+            await this.clickByText(selector, value);
         };
+
+
     };
 
     async getAttribute(selector, attributeName) {

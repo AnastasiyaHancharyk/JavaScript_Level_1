@@ -13,3 +13,11 @@ const EMAIL_FIELD = '//*[@id="email"]';
 const PHONE_FIELD = '//*[@id="phone"]';
 const CANCELLATION_CHECKBOX = '//*[@for="cancellation-policy"]';
 const NEXT_BUTTON = '//*[@type="submit"]';
+
+
+
+export default class PersonalInfoPage extends BasePage {
+
+
+
+};

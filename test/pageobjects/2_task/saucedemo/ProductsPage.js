@@ -87,7 +87,7 @@ export default class ProductsPage extends BasePage {
         // Create an array from added items
         while (i < array.length) {
             let elementNumber = array[i];
-            await this.clickProductNumber(ADD_REMOVE_BUTTON, elementNumber);
+            await this.clickItemNumber(ADD_REMOVE_BUTTON, elementNumber);
             let elementName = await this.getTexts(PRODUCT_NAME, elementNumber);
             let elementPrice = await this.getTexts(PRODUCT_PRICE, elementNumber);
             priceArray[elementNumber] = elementPrice;

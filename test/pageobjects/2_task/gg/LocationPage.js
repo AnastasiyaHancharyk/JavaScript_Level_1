@@ -9,3 +9,10 @@ const ZIP_CODE_FIELD = '//*[@id="zipCode"]';
 const STATE_DROPDOWN = '//*[@id="state"]';
 const STATE_OPTION = '//*[contains(@class, "gg-dropdown__option")]';
 const NEXT_BUTTON = '//*[@type="submit"]';
+
+
+export default class LocationPage extends BasePage {
+
+
+
+};
