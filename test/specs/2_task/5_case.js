@@ -29,7 +29,7 @@ describe('CWB Smoke Test scenarios', () => {
         await homePage.clickBookNowButton();
         await servicePage.clickSelectServiceButton(1);
         await servicePage.clickBookServicesButton();
-        await calendarPage.selectDate(4);
+        await calendarPage.selectDate(3);
         await browser.pause(5000);
 
         

@@ -20,21 +20,24 @@ export default class BasePage {
     };
 
     async clickByText(selector, value) {
-        let numberOfElement = 0;
+        let numberOfElement = 10;
+        let numberOfElements = await this.getNumberOfElements(selector);
         let text = await this.getTexts(selector, numberOfElement);
 
-        // console.log(value);
-        // console.log(text);
-        // console.log(numberOfItems);
+        console.log(value);
+        console.log(text);
+        console.log(numberOfElements);
+ 
+        await $$(selector)[numberOfElement].click();
 
 
-        if (text === value) {
-            await $$(selector)[numberOfElement].click();
-        } else if (text != value) {
-            numberOfElement++;
-            await this.clickByText(selector, value);
-        };
-
+        // if (text === value) {
+        //     await $$(selector)[numberOfElement].click();
+        // } //else {
+        //     numberOfElement++;
+        //     console.log(numberOfElement);
+        //     // await this.clickByText(selector, value);
+        // };
 
     };
 
