@@ -4,42 +4,46 @@ const NEXT_MONTH_BUTTON = '//*[@name="next-month"]';
 const NEXT_BUTTON = '//*[@type="submit"]';
 const DAY_CELL = '//*[contains(@class, "style_day__Xt_Hn")]';
 const APPT_DETAILS = '//*[@class="AppointmentInfo_infoItem__fdYSU"]';
+const DISPLAYED_MONTH = '//*[contains(@class, "Calendar_calendarCaption__NV6Me")]';
 
 
 export default class CalendarPage extends BasePage {
 
 
-    async selectDayFromToday(numberOfDays) {
+    async selectDayFromToday(numberOfDaysFromToday) {
         let date = new Date();
         // getDate() returns the day of the month for this date according to local time
         // setDate() changes the day of the month for this date according to local time
-        date.setDate(date.getDate() + numberOfDays);  // Поменяли значение date на "Сегодняшняя дата + количество дней"
-        let dayInt = date.getDate();
-        // let monthInt = date.getMonth();
-        
-        // let dateToSet = monthInt + '/' + dayInt + '/' + date.getFullYear(); // Дата, которая должна по итогу отображаться
- 
-   
-        let dayString = dayInt.toString();
-        // let monthString = date.toLocaleString('default', { month: 'long' });
-        // let currentMonthName = await this.getText(MONTH_NAME);
-        await this.clickByText(DAY_CELL, dayString);
-        // if (currentMonthName != monthString) {
-        //     await this.click(NEXT_BUTTON);
-        //     await this.selectDayFromToday(numberOfDays);
-        // } else {
-        //     await this.clickByText(DAY_CELL, dayString);
-        //     // console.log(dayString)
-        // }
+        date.setDate(date.getDate() + numberOfDaysFromToday);  // Поменяли значение date на "Сегодняшняя дата + количество дней"
+        let dayInt = date.getDate(); // Day as int
+        let dayString = dayInt.toString(); // Day as string
+        let monthString = date.toLocaleString('default', { month: 'long' }); // Month's full name
+        let fullYear = date.getFullYear();  // Full year
+        let currentMonthName = await this.getText(DISPLAYED_MONTH); // Get current month shown in the calendar
+        let monthAndYear = monthString + " " + fullYear;
 
-        // return dateToSet;
+        let dateToBeDisplayed = monthString + ' ' + dayInt; // Дата, которая должна по итогу отображаться
+
+        if (currentMonthName != monthAndYear) {
+            await this.click(NEXT_MONTH_BUTTON);
+            await this.selectDayFromToday(numberOfDaysFromToday);
+        } else {
+            await this.clickByText(DAY_CELL, dayString);
+        };
+        
+        return dateToBeDisplayed;
     };
 
-    async selectDate(numberOfDays) {
-        
-        await this.selectDayFromToday(numberOfDays);
+    async selectDate(numberOfDaysFromToday) {
+
+        await this.selectDayFromToday(numberOfDaysFromToday);
         // await this.setValue(FIRST_DATE_FIELED, date);
     };
+
+    async getApptDetails () {
+        let value = await this.getText(APPT_DETAILS);
+        return value;
+    }
 
 
 

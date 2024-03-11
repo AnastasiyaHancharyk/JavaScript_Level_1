@@ -19,26 +19,18 @@ export default class BasePage {
         await $$(selector)[numberOfElement].click();
     };
 
+
+    // Function for selecting an element corresponding to the desired value from a set
     async clickByText(selector, value) {
-        let numberOfElement = 10;
         let numberOfElements = await this.getNumberOfElements(selector);
-        let text = await this.getTexts(selector, numberOfElement);
-
-        console.log(value);
-        console.log(text);
-        console.log(numberOfElements);
- 
-        await $$(selector)[numberOfElement].click();
-
-
-        // if (text === value) {
-        //     await $$(selector)[numberOfElement].click();
-        // } //else {
-        //     numberOfElement++;
-        //     console.log(numberOfElement);
-        //     // await this.clickByText(selector, value);
-        // };
-
+        for (let numberOfElement = 0; numberOfElement <= numberOfElements; numberOfElement++) {
+            let text = await this.getTexts(selector, numberOfElement);
+            if (text === value) {
+                await $$(selector)[numberOfElement].waitForClickable({ timeout: 5000 });
+                await $$(selector)[numberOfElement].click();
+                break;
+            };
+        };
     };
 
     async getAttribute(selector, attributeName) {
