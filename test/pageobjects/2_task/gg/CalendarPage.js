@@ -23,7 +23,7 @@ export default class CalendarPage extends BasePage {
         let monthAndYear = monthString + " " + fullYear;
 
         let dateToBeDisplayed = monthString + ' ' + dayInt; // Дата, которая должна по итогу отображаться
-        
+
         if (currentMonthName != monthAndYear) {
             await this.click(NEXT_MONTH_BUTTON);
             await this.selectDayFromToday(numberOfDaysFromToday);
@@ -46,7 +46,9 @@ export default class CalendarPage extends BasePage {
         return value;
     }
 
-
+    async clickNextButton () {
+        await this.click(NEXT_BUTTON);
+    };
 
     async getPageUrl() {
         let url = await this.getCurrentPageUrl();

@@ -34,9 +34,24 @@ describe('CWB Smoke Test scenarios', () => {
         
         let expectedDate = await calendarPage.selectDate(40);
         let actualApptDetails = await calendarPage.getApptDetails();
-        // test
-        console.log(expectedDate);
-        console.log(actualApptDetails);
+        expect(actualApptDetails).to.include(expectedDate);
+        await calendarPage.clickNextButton();
+
+        await timePage.selectTime();
+        await timePage.clickNextButton();
+
+        await locationPage.selectHomeLocation();
+        await locationPage.enterStreet("Street");
+        await locationPage.enterSuite("Suite");
+        await locationPage.enterCity("City");
+        await locationPage.enterZipCode("12345");
+        await locationPage.openStateDropdown();
+        await locationPage.selectState("New Jersey");
+        await locationPage.clickNextButton();
+
+        
+
+
         await browser.pause(5000);
 
         

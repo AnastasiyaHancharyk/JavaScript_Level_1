@@ -20,7 +20,7 @@ export default class BasePage {
     };
 
 
-    // Function for selecting an element corresponding to the desired value from a set
+    // Function for selecting an element corresponding to the desired value
     async clickByText(selector, value) {
         let numberOfElements = await this.getNumberOfElements(selector);
         for (let numberOfElement = 0; numberOfElement <= numberOfElements; numberOfElement++) {

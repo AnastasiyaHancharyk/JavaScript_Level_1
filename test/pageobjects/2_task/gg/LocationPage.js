@@ -13,6 +13,40 @@ const NEXT_BUTTON = '//*[@type="submit"]';
 
 export default class LocationPage extends BasePage {
 
+    async selectFixedLocation () {
+        await this.click(FIXED_LOCATION);
+    };
 
+    async selectHomeLocation () {
+        await this.click(HOME_LOCATION);
+    };
+
+    async enterStreet (value) {
+        await this.setValue(ADDRESS_STREET_FIELD, value);
+    };
+
+    async enterSuite (value) {
+        await this.setValue(ADDRESS_SUITE_FIELD, value);
+    };
+
+    async enterCity (value) {
+        await this.setValue(CITY_FIELD, value);
+    };
+
+    async enterZipCode (value) {
+        await this.setValue(ZIP_CODE_FIELD, value);
+    };
+
+    async openStateDropdown () {
+        await this.click(STATE_DROPDOWN);
+    };
+
+    async selectState (value) {
+        await this.clickByText(STATE_OPTION, value);
+    };
+
+    async clickNextButton () {
+        await this.click(NEXT_BUTTON);
+    };
 
 };
