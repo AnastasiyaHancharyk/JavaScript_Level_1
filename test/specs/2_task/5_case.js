@@ -34,7 +34,7 @@ describe('CWB Smoke Test scenarios', () => {
         
         let expectedDate = await calendarPage.selectDate(40);
         let actualApptDetails = await calendarPage.getApptDetails();
-        
+        // test
         console.log(expectedDate);
         console.log(actualApptDetails);
         await browser.pause(5000);
