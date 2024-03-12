@@ -17,13 +17,13 @@ export default class CalendarPage extends BasePage {
         date.setDate(date.getDate() + numberOfDaysFromToday);  // Поменяли значение date на "Сегодняшняя дата + количество дней"
         let dayInt = date.getDate(); // Day as int
         let dayString = dayInt.toString(); // Day as string
-        let monthString = date.toLocaleString('default', { month: 'long' }); // Month's full name
+        let monthString = date.toLocaleString('eng', { month: 'long' }); // Month's full name
         let fullYear = date.getFullYear();  // Full year
         let currentMonthName = await this.getText(DISPLAYED_MONTH); // Get current month shown in the calendar
         let monthAndYear = monthString + " " + fullYear;
 
         let dateToBeDisplayed = monthString + ' ' + dayInt; // Дата, которая должна по итогу отображаться
-
+        
         if (currentMonthName != monthAndYear) {
             await this.click(NEXT_MONTH_BUTTON);
             await this.selectDayFromToday(numberOfDaysFromToday);
