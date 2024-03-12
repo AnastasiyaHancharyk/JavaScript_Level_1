@@ -36,8 +36,9 @@ export default class CalendarPage extends BasePage {
 
     async selectDate(numberOfDaysFromToday) {
 
-        await this.selectDayFromToday(numberOfDaysFromToday);
+        let dateFromToday = await this.selectDayFromToday(numberOfDaysFromToday);
         // await this.setValue(FIRST_DATE_FIELED, date);
+        return dateFromToday;
     };
 
     async getApptDetails () {
