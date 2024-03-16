@@ -20,7 +20,7 @@ export default class BasePage {
     };
 
 
-    // Function for selecting an element corresponding to the desired value
+    // Function to select an element corresponding to a desired value
     async clickByText(selector, value) {
         let numberOfElements = await this.getNumberOfElements(selector);
         for (let numberOfElement = 0; numberOfElement <= numberOfElements; numberOfElement++) {
@@ -134,6 +134,63 @@ export default class BasePage {
             return parseFloat(str);
         });
         return newArray;
+    };
+
+    // Function to select a specific day from today
+    async selectDayFromToday(numberOfDaysFromToday, daySelector, monthSelector, nextMonthSelector) {
+        let date = new Date();
+        // getDate() returns the day of the month for this date according to local time
+        // setDate() changes the day of the month for this date according to local time
+        date.setDate(date.getDate() + numberOfDaysFromToday);  // Поменяли значение date на "Сегодняшняя дата + количество дней"
+        let dayInt = date.getDate(); // Day as int
+        let dayString = dayInt.toString(); // Day as string
+        let monthString = date.toLocaleString('eng', { month: 'long' }); // Month's full name
+        let fullYear = date.getFullYear();  // Full year
+        let currentMonthName = await this.getText(monthSelector); // Get current month shown in the calendar
+        let monthAndYear = monthString + " " + fullYear;
+
+        let dateToBeDisplayed = monthString + ' ' + dayInt; // Дата, которая должна по итогу отображаться
+
+        if (currentMonthName != monthAndYear) {
+            await this.click(nextMonthSelector);
+            await this.selectDayFromToday(numberOfDaysFromToday, daySelector, monthSelector, nextMonthSelector);
+        } else {
+            await this.clickByText(daySelector, dayString);
+        };
+
+        return dateToBeDisplayed;
+    };
+
+    // Function to return a random state
+    async selectRandomState() {
+        let state = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+        let randomState = Math.floor(Math.random() * state.length);
+        return state[randomState];
+    };
+
+    // Function to return a random phone number
+    async randomPhoneNumber() {
+        let numbers = ['2', '3', '4', '5', '6', '7', '8', '9'];
+        let phoneNumber = '';
+        for (let step = 0; step <= 9; step++) {
+            let randomNumber = Math.floor(Math.random() * numbers.length);
+            phoneNumber += numbers[randomNumber];
+        };
+        return phoneNumber;
+    };
+
+    // Function to create an email address
+    async emailAddress() {
+        let date = new Date(); 
+        let emailAddress = "test" + date.getDate()
+            + (date.getMonth()+1)
+            + date.getFullYear()
+            + date.getHours()
+            + date.getMinutes()
+            + date.getSeconds()
+            + "@gg-test.com"
+        return emailAddress;
     };
 
 }

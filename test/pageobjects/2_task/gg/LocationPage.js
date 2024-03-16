@@ -41,8 +41,10 @@ export default class LocationPage extends BasePage {
         await this.click(STATE_DROPDOWN);
     };
 
-    async selectState (value) {
-        await this.clickByText(STATE_OPTION, value);
+    async selectState () {
+        let state = await this.selectRandomState();
+        await this.clickByText(STATE_OPTION, state);
+        // await this.clickByText(STATE_OPTION, value);
     };
 
     async clickNextButton () {

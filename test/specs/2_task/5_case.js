@@ -1,4 +1,9 @@
-// https://anastasiyatest.glossgenius.com/
+/*
+Single-Provider booking flow:
+1. One service;
+2. Provider is not specified;
+3. Home location.
+*/
 
 import { expect } from 'chai';
 import HomePage from "../../pageobjects/2_task/gg/HomePage.js";
@@ -18,26 +23,27 @@ const personalInfoPage = new PersonalInfoPage();
 const successPage = new SuccessPage();
 
 
-describe('CWB Smoke Test scenarios', () => {
+describe('CWB Smoke Test scenarios (Single Provider)', () => {
 
     beforeEach(() => {
-        homePage.openUrl('https://anastasiyatest.glossgenius.com/');
+        homePage.openUrl('https://admin:24e5c9cc8c438ef7acf4@testuser206.glossgenius-staging.com/');
     });
 
 
-    it('"+" Book 1 service', async () => {
+    it('"+" One service + Provider is not specified + Home location', async () => {
 
         await homePage.clickBookNowButton();
 
-        await servicePage.clickSelectServiceButton(1);
+        homePage.openUrl('https://testuser206.glossgenius-staging.com/services'); // Приходится повторно открывать сайт на этой странице, иначе флоу работает некорректно из-за credentials в url
+        await servicePage.clickSelectServiceButton(0);
         await servicePage.clickBookServicesButton();
         
-        let expectedDate = await calendarPage.selectDate(40);
-        let actualApptDetails = await calendarPage.getApptDetails();
-        expect(actualApptDetails).to.include(expectedDate);
+        let selectedDate = await calendarPage.selectDate(0);
+        let shownApptDetails = await calendarPage.getApptDetails();
+        expect(shownApptDetails).to.include(selectedDate);
         await calendarPage.clickNextButton();
 
-        await timePage.selectTime();
+        await timePage.selectTime();  // Selecting the first time slot in the list
         await timePage.clickNextButton();
 
         await locationPage.selectHomeLocation();
@@ -46,23 +52,20 @@ describe('CWB Smoke Test scenarios', () => {
         await locationPage.enterCity("City");
         await locationPage.enterZipCode("12345");
         await locationPage.openStateDropdown();
-        await locationPage.selectState("New Jersey");
+        await locationPage.selectState();
         await locationPage.clickNextButton();
 
-        
-
+        await personalInfoPage.enterFirstName("Test");
+        await personalInfoPage.enterLastName("Client");
+        await personalInfoPage.enterPronouns("test/pronouns")
+        await personalInfoPage.enterEmail();
+        await personalInfoPage.enterPhoneNumber();
+        await personalInfoPage.clickCancellationCheckbox();
+        // await personalInfoPage.clickNextButton();
 
         await browser.pause(5000);
 
         
     });
-
-
-
-    // it('Simple Date Picker', async () => {
-    //     await datepicker.selectDate(15);
-    //     await browser.pause(5000);
-
-    // });
 
 });
