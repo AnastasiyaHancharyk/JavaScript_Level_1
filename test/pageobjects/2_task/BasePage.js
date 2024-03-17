@@ -15,7 +15,7 @@ export default class BasePage {
         await $(selector).click();
     };
 
-    async clickItemNumber(selector, numberOfElement) {
+    async clickItemByNumber(selector, numberOfElement) {
         await $$(selector)[numberOfElement].click();
     };
 
@@ -83,7 +83,6 @@ export default class BasePage {
             newArray[elementNumber] = elementName;
             elementNumber++;
         };
-        console.log(newArray);
         return newArray;
     };
 
@@ -101,7 +100,6 @@ export default class BasePage {
         } else if (sortingType === 'original') {
             newArray;
         };
-        console.log(newArray);
         return newArray;
     };
 
@@ -115,7 +113,6 @@ export default class BasePage {
         } else if (sortingType === 'original') {
             newArray;
         };
-        console.log(newArray);
         return newArray;
     };
 
@@ -161,12 +158,9 @@ export default class BasePage {
         return dateToBeDisplayed;
     };
 
-    // Function to return a random state
-    async selectRandomState() {
-        let state = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
-        let randomState = Math.floor(Math.random() * state.length);
-        return state[randomState];
+    //Function to get a random number from range
+    async randomNumberFromRange (maximumNumber) {
+        return Math.floor(Math.random() * maximumNumber);
     };
 
     // Function to return a random phone number

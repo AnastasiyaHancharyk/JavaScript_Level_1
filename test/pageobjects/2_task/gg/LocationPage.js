@@ -42,9 +42,9 @@ export default class LocationPage extends BasePage {
     };
 
     async selectState () {
-        let state = await this.selectRandomState();
-        await this.clickByText(STATE_OPTION, state);
-        // await this.clickByText(STATE_OPTION, value);
+        let numberOfStates = await this.getNumberOfElements(STATE_OPTION);
+        let state = await this.randomNumberFromRange(numberOfStates);
+        await this.clickItemByNumber(STATE_OPTION, state);
     };
 
     async clickNextButton () {

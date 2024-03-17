@@ -13,13 +13,13 @@ export default class CalendarPage extends BasePage {
 
         let dateFromToday = await this.selectDayFromToday(numberOfDaysFromToday, DAY_CELL, DISPLAYED_MONTH, NEXT_MONTH_BUTTON);
         // await this.setValue(FIRST_DATE_FIELED, date);
-        return dateFromToday;
+        return dateFromToday.toLowerCase();
     };
 
     async getApptDetails () {
         let value = await this.getText(APPT_DETAILS);
-        return value;
-    }
+        return value.toLowerCase();
+    };
 
     async clickNextButton () {
         await this.click(NEXT_BUTTON);

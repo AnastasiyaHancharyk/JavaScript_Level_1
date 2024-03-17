@@ -27,7 +27,6 @@ export default class PersonalInfoPage extends BasePage {
     async enterEmail () {
         let emailAddress = await this.emailAddress();
         await this.setValue(EMAIL_FIELD, emailAddress);
-        console.log(emailAddress)
     };
 
     async enterPhoneNumber () {

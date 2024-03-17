@@ -23,7 +23,7 @@ const personalInfoPage = new PersonalInfoPage();
 const successPage = new SuccessPage();
 
 
-describe('CWB Smoke Test scenarios (Single Provider)', () => {
+describe('CWB Smoke Test scenarios (Single-Provider)', () => {
 
     beforeEach(() => {
         homePage.openUrl('https://admin:24e5c9cc8c438ef7acf4@testuser206.glossgenius-staging.com/');
@@ -35,21 +35,24 @@ describe('CWB Smoke Test scenarios (Single Provider)', () => {
         await homePage.clickBookNowButton();
 
         homePage.openUrl('https://testuser206.glossgenius-staging.com/services'); // Приходится повторно открывать сайт на этой странице, иначе флоу работает некорректно из-за credentials в url
-        await servicePage.clickSelectServiceButton(0);
+        let selectedService = await servicePage.clickSelectServiceButton(0);
         await servicePage.clickBookServicesButton();
         
-        let selectedDate = await calendarPage.selectDate(0);
-        let shownApptDetails = await calendarPage.getApptDetails();
-        expect(shownApptDetails).to.include(selectedDate);
+        let selectedDate = await calendarPage.selectDate(0); // Selecting today's day on the calendar
+        let ApptDetailsOnCalendarPage = await calendarPage.getApptDetails();
+        expect(ApptDetailsOnCalendarPage).to.include(selectedService);
+        expect(ApptDetailsOnCalendarPage).to.include(selectedDate);
         await calendarPage.clickNextButton();
 
-        await timePage.selectTime();  // Selecting the first time slot in the list
+        let selectedTime = await timePage.selectTime();  // Selecting the first time slot in the list
+        let ApptDetailsOnTimePage = await timePage.getApptDetails();
+        expect(ApptDetailsOnTimePage).to.include(selectedTime);
         await timePage.clickNextButton();
 
         await locationPage.selectHomeLocation();
-        await locationPage.enterStreet("Street");
-        await locationPage.enterSuite("Suite");
-        await locationPage.enterCity("City");
+        await locationPage.enterStreet("Test Street");
+        await locationPage.enterSuite("Test Suite");
+        await locationPage.enterCity("Test City");
         await locationPage.enterZipCode("12345");
         await locationPage.openStateDropdown();
         await locationPage.selectState();
@@ -57,12 +60,16 @@ describe('CWB Smoke Test scenarios (Single Provider)', () => {
 
         await personalInfoPage.enterFirstName("Test");
         await personalInfoPage.enterLastName("Client");
-        await personalInfoPage.enterPronouns("test/pronouns")
+        await personalInfoPage.enterPronouns("some/test")
         await personalInfoPage.enterEmail();
         await personalInfoPage.enterPhoneNumber();
         await personalInfoPage.clickCancellationCheckbox();
-        // await personalInfoPage.clickNextButton();
+        await personalInfoPage.clickNextButton();
 
+        let ApptDetailsOnSuccessPage = await successPage.getApptDetails();
+        expect(ApptDetailsOnSuccessPage).to.include(selectedService);
+        expect(ApptDetailsOnSuccessPage).to.include(selectedDate);
+        expect(ApptDetailsOnSuccessPage).to.include(selectedTime);
         await browser.pause(5000);
 
         
