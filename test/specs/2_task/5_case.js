@@ -39,14 +39,14 @@ describe('CWB Smoke Test scenarios (Single-Provider)', () => {
         await servicePage.clickBookServicesButton();
         
         let selectedDate = await calendarPage.selectDate(0); // Selecting today's day on the calendar
-        let ApptDetailsOnCalendarPage = await calendarPage.getApptDetails();
-        expect(ApptDetailsOnCalendarPage).to.include(selectedService);
-        expect(ApptDetailsOnCalendarPage).to.include(selectedDate);
+        let apptDetailsOnCalendarPage = await calendarPage.getApptDetails();
+        expect(apptDetailsOnCalendarPage).to.include(selectedService);
+        expect(apptDetailsOnCalendarPage).to.include(selectedDate);
         await calendarPage.clickNextButton();
 
         let selectedTime = await timePage.selectTime();  // Selecting the first time slot in the list
-        let ApptDetailsOnTimePage = await timePage.getApptDetails();
-        expect(ApptDetailsOnTimePage).to.include(selectedTime);
+        let apptDetailsOnTimePage = await timePage.getApptDetails();
+        expect(apptDetailsOnTimePage).to.include(selectedTime);
         await timePage.clickNextButton();
 
         await locationPage.selectHomeLocation();
@@ -66,10 +66,10 @@ describe('CWB Smoke Test scenarios (Single-Provider)', () => {
         await personalInfoPage.clickCancellationCheckbox();
         await personalInfoPage.clickNextButton();
 
-        let ApptDetailsOnSuccessPage = await successPage.getApptDetails();
-        expect(ApptDetailsOnSuccessPage).to.include(selectedService);
-        expect(ApptDetailsOnSuccessPage).to.include(selectedDate);
-        expect(ApptDetailsOnSuccessPage).to.include(selectedTime);
+        let apptDetailsOnSuccessPage = await successPage.getApptDetails();
+        expect(apptDetailsOnSuccessPage).to.include(selectedService);
+        expect(apptDetailsOnSuccessPage).to.include(selectedDate);
+        expect(apptDetailsOnSuccessPage).to.include(selectedTime);
         await browser.pause(5000);
 
         

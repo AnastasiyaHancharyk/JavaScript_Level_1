@@ -27,6 +27,19 @@ export default class ServicePage extends BasePage {
         await this.click(BOOK_SERVICES_BUTTON);
     };
 
+    async clickProfessionalDropdown() {
+        await this.click(SELECT_A_PROFESSIONAL_DROPDOWN);
+    };
+
+        /**
+    * @param {string} numberOfProvider - 0 == "Any Professional"; total number of available providers == 2.
+    */
+    async selectProfessionalFromList(numberOfProvider) {
+        await this.clickItemByNumber(SELECT_A_PROFESSIONAL_FROM_LIST, numberOfProvider);
+        let professionalName = await this.getTexts(SERVICE_NAME, numberOfProvider);
+        return professionalName.toLowerCase();
+    };
+
     async getPageUrl() {
         let url = await this.getCurrentPageUrl();
         return url;
