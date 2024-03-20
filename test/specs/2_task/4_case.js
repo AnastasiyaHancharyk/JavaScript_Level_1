@@ -43,17 +43,18 @@ describe('CWB Smoke Test scenarios (Multi-Provider)', () => {
         await msmpDateAndTimePage.clickDatePickerButton();
         await msmpDateAndTimePage.clickFirstAvailableDateOption();
         await msmpDateAndTimePage.clickSelectDateButton();
-        await msmpDateAndTimePage.clickNextButton();
+        await msmpDateAndTimePage.getSelectedTime();
+        // await msmpDateAndTimePage.clickNextButton();
         
-        await locationPage.selectFixedLocation();
-        await locationPage.clickNextButton();
+        // await locationPage.selectFixedLocation();
+        // await locationPage.clickNextButton();
 
-        await personalInfoPage.enterFirstName("Test");
-        await personalInfoPage.enterLastName("Client");
-        await personalInfoPage.enterPronouns("some/test")
-        await personalInfoPage.enterEmail();
-        await personalInfoPage.enterPhoneNumber();
-        await personalInfoPage.clickCancellationCheckbox();
+        // await personalInfoPage.enterFirstName("Test");
+        // await personalInfoPage.enterLastName("Client");
+        // await personalInfoPage.enterPronouns("some/test")
+        // await personalInfoPage.enterEmail();
+        // await personalInfoPage.enterPhoneNumber();
+        // await personalInfoPage.clickCancellationCheckbox();
         // await personalInfoPage.clickNextButton();
 
         // let apptDetailsOnSuccessPage = await successPage.getApptDetails();

@@ -35,8 +35,8 @@ export default class ServicePage extends BasePage {
     * @param {string} numberOfProvider - 0 == "Any Professional"; total number of available providers == 2.
     */
     async selectProfessionalFromList(numberOfProvider) {
+        let professionalName = await this.getTexts(SELECT_A_PROFESSIONAL_FROM_LIST, numberOfProvider);
         await this.clickItemByNumber(SELECT_A_PROFESSIONAL_FROM_LIST, numberOfProvider);
-        let professionalName = await this.getTexts(SERVICE_NAME, numberOfProvider);
         return professionalName.toLowerCase();
     };
 
