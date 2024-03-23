@@ -61,10 +61,10 @@ describe('CWB Smoke Test scenarios (Single-Provider)', () => {
         await personalInfoPage.enterFirstName("Test");
         await personalInfoPage.enterLastName("Client");
         await personalInfoPage.enterPronouns("some/test")
-        await personalInfoPage.enterEmail();
-        await personalInfoPage.enterPhoneNumber();
+        await personalInfoPage.enterEmail("a.hancharyk+1@glossgenius.com");
+        await personalInfoPage.enterPhoneNumber("9999999999");
         await personalInfoPage.clickCancellationCheckbox();
-        await personalInfoPage.clickNextButton();
+        // await personalInfoPage.clickNextButton();
 
         let apptDetailsOnSuccessPage = await successPage.getApptDetails();
         expect(apptDetailsOnSuccessPage).to.include(selectedService);

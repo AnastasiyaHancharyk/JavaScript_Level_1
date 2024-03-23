@@ -4,7 +4,7 @@ const BOOK_NOW_BUTTON = '//*[contains(@class, "button__ETGhE")]';
 
 export default class HomePage extends BasePage {
 
-    openUrl(url) {
+    async openUrl(url) {
         return super.openUrl(url);
     };
 
@@ -16,5 +16,10 @@ export default class HomePage extends BasePage {
         let url = await this.getCurrentPageUrl();
         return url;
     };
+
+    async getPageUrl () {
+        let url = await this.getCurrentPageUrl();
+        return url;
+      };
 
 };

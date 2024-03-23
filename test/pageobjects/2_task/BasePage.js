@@ -55,6 +55,7 @@ export default class BasePage {
     };
 
     async getCurrentPageUrl() {
+        await browser.pause(2000);
         let url = await browser.getUrl();
         return url;
     };
@@ -159,7 +160,7 @@ export default class BasePage {
     };
 
     //Function to get a random number from range
-    async randomNumberFromRange (maximumNumber) {
+    async randomNumberFromRange(maximumNumber) {
         return Math.floor(Math.random() * maximumNumber);
     };
 
@@ -176,9 +177,9 @@ export default class BasePage {
 
     // Function to create an email address
     async emailAddress() {
-        let date = new Date(); 
+        let date = new Date();
         let emailAddress = "test" + date.getDate()
-            + (date.getMonth()+1)
+            + (date.getMonth() + 1)
             + date.getFullYear()
             + date.getHours()
             + date.getMinutes()
@@ -187,4 +188,4 @@ export default class BasePage {
         return emailAddress;
     };
 
-}
+};

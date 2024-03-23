@@ -7,7 +7,7 @@ const EMAIL_FIELD = '//*[@id="email"]';
 const PHONE_FIELD = '//*[@id="phone"]';
 const CANCELLATION_CHECKBOX = '//*[@for="cancellation-policy"]';
 const NEXT_BUTTON = '//*[@type="submit"]';
-
+const APPT_DETAILS = '//*[@class="AppointmentInfo_infoItem__fdYSU"]';
 
 
 export default class PersonalInfoPage extends BasePage {
@@ -24,13 +24,13 @@ export default class PersonalInfoPage extends BasePage {
         await this.setValue(PRONOUNS_FIELD, value);
     };
 
-    async enterEmail () {
-        let emailAddress = await this.emailAddress();
+    async enterEmail (emailAddress) {
+        // let emailAddress = await this.emailAddress(); // This function allows to enter a unique email address
         await this.setValue(EMAIL_FIELD, emailAddress);
     };
 
-    async enterPhoneNumber () {
-        let phoneNumber = await this.randomPhoneNumber();
+    async enterPhoneNumber (phoneNumber) {
+        // let phoneNumber = await this.randomPhoneNumber(); // This function allows to enter a random phone number
         await this.setValue(PHONE_FIELD, phoneNumber);
     };
 
@@ -40,6 +40,24 @@ export default class PersonalInfoPage extends BasePage {
 
     async clickNextButton () {
         await this.click(NEXT_BUTTON);
+    };
+
+    async getApptDetails() {
+        let numberOfAppt = await this.getNumberOfElements(APPT_DETAILS);
+        if (numberOfAppt == 1) {
+            let apptDetailsOne = await this.getText(APPT_DETAILS);
+            return apptDetailsOne.toLowerCase();
+        } else if (numberOfAppt == 2) {
+            let apptDetailsOne = await this.getTexts(APPT_DETAILS, 0);
+            let apptDetailsTwo = await this.getTexts(APPT_DETAILS, 1);
+            return { apptDetailsOne: apptDetailsOne.toLowerCase(), apptDetailsTwo: apptDetailsTwo.toLowerCase() };
+        } else if (numberOfAppt == 2) {
+            let apptDetailsOne = await this.getTexts(APPT_DETAILS, 0);
+            let apptDetailsTwo = await this.getTexts(APPT_DETAILS, 1);
+            let apptDetailsThree = await this.getTexts(APPT_DETAILS, 2);
+            return { apptDetailsOne: apptDetailsOne.toLowerCase(), apptDetailsTwo: apptDetailsTwo.toLowerCase(), apptDetailsThree: apptDetailsThree.toLowerCase() };
+        };
+
     };
 
 };
