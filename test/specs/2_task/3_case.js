@@ -6,17 +6,19 @@
 5. Sort the Products by Price (High to Low)=> Verify that the sorting is correct
 */
 
+import BasePage from "../../pageobjects/2_task/BasePage.js";
 import LogInPage from "../../pageobjects/2_task/saucedemo/LogInPage.js";
 import ProductsPage from "../../pageobjects/2_task/saucedemo/ProductsPage.js";
 import { expect } from 'chai';
 
 const logInPage = new LogInPage();
 const productsPage = new ProductsPage();
+const basePage = new BasePage();
 
 describe('Sorting scenarios', () => {
 
     beforeEach(() => {
-        logInPage.openUrl('https://www.saucedemo.com/');
+        basePage.openUrl('https://www.saucedemo.com/');
     });
 
     // Function to log into the app and verify that the use is logged in successfully
@@ -38,6 +40,7 @@ describe('Sorting scenarios', () => {
     it('"+" Sorting by Name (A to Z)', async () => {
         await logInWithValidCreds();
         let expectedSorting = await productsPage.getProductNames('sort');
+        await productsPage.clickSortButton();
         await productsPage.selectSortingType('A to Z');
         let currentSorting = await productsPage.getProductNames('original');
         expect(currentSorting).to.have.ordered.members(expectedSorting);
@@ -47,6 +50,7 @@ describe('Sorting scenarios', () => {
     it('"+" Sorting by Name (Z to A)', async () => {
         await logInWithValidCreds();
         let expectedSorting = await productsPage.getProductNames('reverse');
+        await productsPage.clickSortButton();
         await productsPage.selectSortingType('Z to A');
         let currentSorting = await productsPage.getProductNames('original');
         expect(currentSorting).to.have.ordered.members(expectedSorting);
@@ -55,6 +59,7 @@ describe('Sorting scenarios', () => {
     it('"+" Sorting by Price (Low to High)', async () => {
         await logInWithValidCreds();
         let expectedSorting = await productsPage.getProductPrices('sort');
+        await productsPage.clickSortButton();
         await productsPage.selectSortingType('Low to High');
         let currentSorting = await productsPage.getProductPrices('original');
         expect(currentSorting).to.have.ordered.members(expectedSorting);
@@ -63,6 +68,7 @@ describe('Sorting scenarios', () => {
     it('"+" Sorting by Price (High to Low)', async () => {
         await logInWithValidCreds();
         let expectedSorting = await productsPage.getProductPrices('reverse');
+        await productsPage.clickSortButton();
         await productsPage.selectSortingType('High to Low');
         let currentSorting = await productsPage.getProductPrices('original');
         expect(currentSorting).to.have.ordered.members(expectedSorting);

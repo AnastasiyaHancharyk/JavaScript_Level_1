@@ -31,6 +31,11 @@ export default class ServicePage extends BasePage {
         await this.click(SELECT_A_PROFESSIONAL_DROPDOWN);
     };
 
+    async geProfessionalShownInDropdown() {
+        let shownProfessional = await this.getText(SELECT_A_PROFESSIONAL_DROPDOWN);
+        return shownProfessional.toLowerCase();
+    };
+
         /**
     * @param {string} numberOfProvider - 0 == "Any Professional"; total number of available providers == 2.
     */

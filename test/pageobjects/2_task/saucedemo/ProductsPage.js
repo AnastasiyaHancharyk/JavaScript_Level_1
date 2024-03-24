@@ -60,21 +60,24 @@ export default class ProductsPage extends BasePage {
         return x;
     };
 
+    async clickSortButton() {
+        await this.click(PRODUCT_SORT_DROPDOWN);
+    };
+
     /**
     * Function to select sorting type
     * @param {string} sortingType - 'A to Z'  OR  'Z to A'  OR  'Low to High'  OR  'High to Low'.
     */
     async selectSortingType(sortingType) {
-        await this.click(PRODUCT_SORT_DROPDOWN);
         let selectedType = sortingType;
         if (selectedType === 'A to Z') {
-            await this.click(SORT_BY_NAME_A_TO_Z);
+            await this.clickWithoutWaiting(SORT_BY_NAME_A_TO_Z);
         } else if (selectedType === 'Z to A') {
-            await this.click(SORT_BY_NAME_Z_TO_A);
+            await this.clickWithoutWaiting(SORT_BY_NAME_Z_TO_A);
         } else if (selectedType === 'Low to High') {
-            await this.click(SORT_BY_PRICE_LOW_TO_HIGH);
+            await this.clickWithoutWaiting(SORT_BY_PRICE_LOW_TO_HIGH);
         } else if (selectedType === 'High to Low') {
-            await this.click(SORT_BY_PRICE_HUGH_TO_LOW);
+            await this.clickWithoutWaiting(SORT_BY_PRICE_HUGH_TO_LOW);
         };
     };
 

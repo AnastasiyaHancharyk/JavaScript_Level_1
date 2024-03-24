@@ -15,6 +15,10 @@ export default class BasePage {
         await $(selector).click();
     };
 
+    async clickWithoutWaiting(selector) {
+        await $(selector).click();
+    };
+
     async clickItemByNumber(selector, numberOfElement) {
         await $$(selector)[numberOfElement].click();
     };

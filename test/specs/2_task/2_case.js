@@ -12,6 +12,7 @@
 11. Click on the Finish button;
 */
 
+import BasePage from "../../pageobjects/2_task/BasePage.js";
 import CartPage from "../../pageobjects/2_task/saucedemo/CartPage.js";
 import CheckoutInfoPage from "../../pageobjects/2_task/saucedemo/CheckoutInfoPage.js";
 import CheckoutOverviewPage from "../../pageobjects/2_task/saucedemo/CheckoutOverviewPage.js";
@@ -24,11 +25,12 @@ const productsPage = new ProductsPage();
 const cartPage = new CartPage();
 const checkoutInfoPage = new CheckoutInfoPage();
 const checkoutOverviewPage = new CheckoutOverviewPage();
+const basePage = new BasePage();
 
 describe('Adding products to cart', () => {
 
     beforeEach(() => {
-        logInPage.openUrl('https://www.saucedemo.com/');
+        basePage.openUrl('https://www.saucedemo.com/');
     });
 
     // Function to log into the app and verify that the use is logged in successfully
