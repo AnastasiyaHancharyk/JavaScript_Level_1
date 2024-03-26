@@ -1,0 +1,30 @@
+{
+  "name": "javascript_level_1",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "JavaScript_Level_1",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha",
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^8.20.0",
+    "@wdio/cli": "^8.20.5",
+    "@wdio/globals": "^8.20.5",
+    "@wdio/local-runner": "^8.20.5",
+    "@wdio/mocha-framework": "^8.20.3",
+    "@wdio/spec-reporter": "^8.20.0",
+    "chai": "^4.3.10",
+    "chromedriver": "^116.0.0",
+    "geckodriver": "^4.2.0",
+    "wdio-chromedriver-service": "^8.1.1",
+    "wdio-geckodriver-service": "^5.0.2"
+  },
+  "dependencies": {
+    "webdriverio": "^8.33.1"
+  }
+}
