@@ -7,10 +7,6 @@ const CONTINUE_BUTTON = '//*[@id="continue"]';
 
 export default class CheckoutInfoPage extends BasePage {
 
-    openUrl(url) {
-        return super.openUrl(url);
-    };
-
     async enterFirstName (firstName) {
         await this.setValue(FIRST_NAME_FIELD, firstName);
     };

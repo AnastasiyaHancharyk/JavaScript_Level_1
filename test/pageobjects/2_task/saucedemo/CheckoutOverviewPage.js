@@ -2,15 +2,12 @@ import BasePage from "../BasePage.js"
 
 const PRICE_WITHOUT_TAX = '//*[@class="summary_subtotal_label"]';
 const TAX = '//*[@class="summary_tax_label"]';
-const PRICE_WITH_TAX = '//*[@class="summary_info_label summary_total_label"]';
+const PRICE_WITH_TAX = '//*[contains (@class, "summary_total_label")]';
 const FINISH_BUTTON = '//*[@id="finish"]';
 
 
 export default class CheckoutOverviewPage extends BasePage {
 
-    openUrl(url) {
-        return super.openUrl(url);
-    };
 
     async getPriceWithoutTax () {
         let priceWithText = await this.getText(PRICE_WITHOUT_TAX);

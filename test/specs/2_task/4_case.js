@@ -1,8 +1,26 @@
 /*
 Multi-Provider booking flow:
-1. Two services with two providers;
-2. Providers are specified;
-3. Fixed location;
+1. Go to core-web-booking;
+   AND verify the url;
+   AND click the "Book Now"
+2. On the Services page, verify the url
+   AND select two services with two different providers 
+   AND get the names of each service and provider
+   AND click the "Book" button;
+3. On the Date/Time page, verify the url 
+   AND get the date/time values
+   AND click the "Next" button;
+4. On the Location page, verify the url
+   AND select Fixed location 
+   AND check the data (service name, provider, date, time) in details for each appt
+   AND click the "Next" button; 
+5. On the Personal Info page, verify the url
+   AND fill in the fields with valid data
+   AND check the policy checkbox
+   AND check the data (service name, provider, date, time) in details for each appt
+   AND click the "Next" button; 
+6. On the Success Page  verify the url
+   AND check the data (service name, provider, date, time) in details for each appt
 */
 
 import { expect } from 'chai';
@@ -30,53 +48,59 @@ describe('CWB Smoke Test scenarios (Multi-Provider)', () => {
 
     // Function to verify that the current url inludes the expected path/page
     async function verifyCurrentUrlIncludesExpectedPage(expectedPage) {
-        let currentPageUrl = await homePage.getPageUrl();
+        let currentPageUrl = await basePage.getCurrentPageUrl();
         expect(currentPageUrl).to.include(expectedPage);
     };
 
 
-    it('"+" Two services with two providers + Providers are  specified + Fixed location', async () => {
+    it('1. Two services with two providers + Providers are  specified + Fixed location', async () => {
 
+        await verifyCurrentUrlIncludesExpectedPage('glossgenius-staging.com');
         await homePage.clickBookNowButton();
-        await homePage.openUrl('https://testuser206.glossgenius-staging.com/services'); // Приходится повторно открывать сайт на этой странице, иначе флоу работает некорректно из-за credentials в url
+        await basePage.openUrl('https://testuser206.glossgenius-staging.com/services'); // Приходится повторно открывать сайт на этой странице, иначе флоу работает некорректно из-за credentials в url
 
         // Services page:
         await verifyCurrentUrlIncludesExpectedPage('/services');
         await servicePage.clickProfessionalDropdown();
-        let providerOne = await servicePage.selectProfessionalFromList(1); // Get the first provider's name
-        let selectedServiceOne = await servicePage.clickSelectServiceButton(0); // Get the first service's name
+        let providerOne = await servicePage.getProfessionalName(1);     // Get name of the first provider
+        await servicePage.selectProfessionalFromList(1);                // Select the first provider
+        let selectedServiceOne = await servicePage.getServiceName(0);   // Get the name of the first service
+        await servicePage.clickSelectServiceButton(0);                  // Select the first service
         await servicePage.clickProfessionalDropdown();
-        let providerTwo = await servicePage.selectProfessionalFromList(2); // Get the second provider's name
-        let selectedServiceTwo = await servicePage.clickSelectServiceButton(0); // Get the second service's name
+        let providerTwo = await servicePage.getProfessionalName(2);     // Get name of the second provider 
+        await servicePage.selectProfessionalFromList(2);                // Select the second provider
+        let selectedServiceTwo = await servicePage.getServiceName(1);   // Get the name of the second service
+        await servicePage.clickSelectServiceButton(1);                  // Select the second service
         await servicePage.clickBookServicesButton();
 
         // MSMP Date and Time page:
         await verifyCurrentUrlIncludesExpectedPage('/multi-book?step=selectDateAndTimes');
         let selectedDate = await msmpDateAndTimePage.getDateDisplayedInDatePicker(); // Get the selected date
-        let startTime = await msmpDateAndTimePage.getSelectedTime();
-        let apptOneStartTime = startTime.startTimeOne; // Get the start time of the first appointment
-        let apptTwoStartTime = startTime.startTimeTwo; // Get the start time of the second appointment
+        let startTime = await msmpDateAndTimePage.getSelectedTime();                 // Get the selected start time of two appts
+        let apptOneStartTime = startTime.startTimeOne;                               // Get the start time of the first appointment
+        let apptTwoStartTime = startTime.startTimeTwo;                               // Get the start time of the second appointment
         await msmpDateAndTimePage.clickNextButton();
 
         // Location page:
         await verifyCurrentUrlIncludesExpectedPage('/multi-book?step=selectLocation');
-        let apptDetailsOnLocationPage = await locationPage.getApptDetails(); // Get the appointment details on the Location page
+        let fixedAddress = await locationPage.getFixedLocationAddress(); // Get Fixed Location's address
+        await locationPage.selectFixedLocation();    
+        let apptDetailsOnLocationPage = await locationPage.getApptDetails();
         expect(apptDetailsOnLocationPage.apptDetailsOne).to.include(selectedDate.DateWithoutYear + " - " + apptOneStartTime + " • " + selectedServiceOne + " • " + providerOne);
         expect(apptDetailsOnLocationPage.apptDetailsTwo).to.include(selectedDate.DateWithoutYear + " - " + apptTwoStartTime + " • " + selectedServiceTwo + " • " + providerTwo);
-        let fixedAddress = await locationPage.selectFixedLocation();
         await locationPage.clickNextButton();
 
         // Personal Info page:
         await verifyCurrentUrlIncludesExpectedPage('/multi-book?step=clientInformation');
-        let apptDetailsOnPersonalInfoPage = await personalInfoPage.getApptDetails(); // Get the appointment details on the Personal Info page
-        expect(apptDetailsOnPersonalInfoPage.apptDetailsOne).to.include(selectedDate.DateWithoutYear + " - " + apptOneStartTime + " • " + selectedServiceOne + " • " + providerOne);
-        expect(apptDetailsOnPersonalInfoPage.apptDetailsTwo).to.include(selectedDate.DateWithoutYear + " - " + apptTwoStartTime + " • " + selectedServiceTwo + " • " + providerTwo);
         await personalInfoPage.enterFirstName("Test");
         await personalInfoPage.enterLastName("Client");
         await personalInfoPage.enterPronouns("some/test")
         await personalInfoPage.enterEmail("a.hancharyk+1@glossgenius.com"); // Для полей Email и Phone Number я написала отдельные функции, позволяющие вводить уникальные/рандомные значения ...        
         await personalInfoPage.enterPhoneNumber("9999999999");              // ... каждый раз, но для тестов решила пока оставить одни и те же данные (допутимо в рамках функциональности).
-        await personalInfoPage.clickCancellationCheckbox();                 
+        await personalInfoPage.clickCancellationCheckbox();   
+        let apptDetailsOnPersonalInfoPage = await personalInfoPage.getApptDetails();
+        expect(apptDetailsOnPersonalInfoPage.apptDetailsOne).to.include(selectedDate.DateWithoutYear + " - " + apptOneStartTime + " • " + selectedServiceOne + " • " + providerOne);
+        expect(apptDetailsOnPersonalInfoPage.apptDetailsTwo).to.include(selectedDate.DateWithoutYear + " - " + apptTwoStartTime + " • " + selectedServiceTwo + " • " + providerTwo);              
         await personalInfoPage.clickNextButton();
 
         // Success page:
@@ -90,8 +114,6 @@ describe('CWB Smoke Test scenarios (Multi-Provider)', () => {
         expect(apptDetailsOnSuccessPage.apptDetailsTwo).to.include(selectedDate.DateWithYear + " - " + apptTwoStartTime);
         expect(apptDetailsOnSuccessPage.apptDetailsTwo).to.include(selectedServiceTwo + " with " + providerTwo);
         expect(apptDetailsOnSuccessPage.apptDetailsTwo).to.include(fixedAddress);
-
-        await browser.pause(3000);
 
     });
 

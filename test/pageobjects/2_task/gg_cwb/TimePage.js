@@ -13,10 +13,11 @@ export default class TimePage extends BasePage {
 
     async selectTime () {
         await this.click(TIME_CELL);
+    };
+
+    async getTime () {
         let selectedTime = await this.getText(TIME_CELL);
         let startTime = selectedTime.substring(0, selectedTime.indexOf(' -'));
-        console.log(selectedTime);
-        console.log(startTime);
         return startTime.toLowerCase();
     };
 

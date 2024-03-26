@@ -10,15 +10,14 @@ const SELECT_A_PROFESSIONAL_FROM_LIST ='//*[contains(@class, "gg-dropdown__optio
 
 export default class ServicePage extends BasePage {
 
-    openUrl(url) {
-        return super.openUrl(url);
-    };
-
     /**
     * @param {string} numberOfElement - number of a service according to the displayed order (0 is the first)
     */
     async clickSelectServiceButton(numberOfElement) {
         await this.clickItemByNumber(SELECT_SERVICE_BUTTON, numberOfElement);
+    };
+
+    async getServiceName(numberOfElement) {
         let serviceName = await this.getTexts(SERVICE_NAME, numberOfElement);
         return serviceName.toLowerCase();
     };
@@ -31,7 +30,7 @@ export default class ServicePage extends BasePage {
         await this.click(SELECT_A_PROFESSIONAL_DROPDOWN);
     };
 
-    async geProfessionalShownInDropdown() {
+    async getProfessionalShownInDropdown() {
         let shownProfessional = await this.getText(SELECT_A_PROFESSIONAL_DROPDOWN);
         return shownProfessional.toLowerCase();
     };
@@ -40,14 +39,12 @@ export default class ServicePage extends BasePage {
     * @param {string} numberOfProvider - 0 == "Any Professional"; total number of available providers == 2.
     */
     async selectProfessionalFromList(numberOfProvider) {
-        let professionalName = await this.getTexts(SELECT_A_PROFESSIONAL_FROM_LIST, numberOfProvider);
         await this.clickItemByNumber(SELECT_A_PROFESSIONAL_FROM_LIST, numberOfProvider);
-        return professionalName.toLowerCase();
     };
 
-    async getPageUrl() {
-        let url = await this.getCurrentPageUrl();
-        return url;
+    async getProfessionalName(numberOfProvider) {
+        let professionalName = await this.getTexts(SELECT_A_PROFESSIONAL_FROM_LIST, numberOfProvider);
+        return professionalName.toLowerCase();
     };
 
 

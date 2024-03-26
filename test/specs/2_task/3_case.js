@@ -1,9 +1,9 @@
 /*
-1. Log in to the application => Verify that a user is on the /inventory page
-2. Sort the Products by Name (A to Z) => Verify that the sorting is correct
-3. Sort the Products by Name (Z to A) => Verify that the sorting is correct
-4. Sort the Products by Price (Low to High)=> Verify that the sorting is correct
-5. Sort the Products by Price (High to Low)=> Verify that the sorting is correct
+1. Log in to the aucedemo app => Verify that a user is on the /inventory page
+2. Sort the products by Name (A to Z) => Verify that the sorting is correct
+3. Sort the products by Name (Z to A) => Verify that the sorting is correct
+4. Sort the products by Price (Low to High)=> Verify that the sorting is correct
+5. Sort the products by Price (High to Low)=> Verify that the sorting is correct
 */
 
 import BasePage from "../../pageobjects/2_task/BasePage.js";
@@ -39,38 +39,38 @@ describe('Sorting scenarios', () => {
 
     it('"+" Sorting by Name (A to Z)', async () => {
         await logInWithValidCreds();
-        let expectedSorting = await productsPage.getProductNames('sort');
+        let expectedSorting = await productsPage.getProductNames('sort'); // Get products' names, create an array and sort its items alphabetically
         await productsPage.clickSortButton();
         await productsPage.selectSortingType('A to Z');
-        let currentSorting = await productsPage.getProductNames('original');
+        let currentSorting = await productsPage.getProductNames('original'); // Get products' names after sorting
         expect(currentSorting).to.have.ordered.members(expectedSorting);
 
     });
 
     it('"+" Sorting by Name (Z to A)', async () => {
         await logInWithValidCreds();
-        let expectedSorting = await productsPage.getProductNames('reverse');
+        let expectedSorting = await productsPage.getProductNames('reverse'); // Get products' names, create an array and sort its items alphabetically (reversed)
         await productsPage.clickSortButton();
         await productsPage.selectSortingType('Z to A');
-        let currentSorting = await productsPage.getProductNames('original');
+        let currentSorting = await productsPage.getProductNames('original'); // Get products' names after sorting
         expect(currentSorting).to.have.ordered.members(expectedSorting);
     });
 
     it('"+" Sorting by Price (Low to High)', async () => {
         await logInWithValidCreds();
-        let expectedSorting = await productsPage.getProductPrices('sort');
+        let expectedSorting = await productsPage.getProductPrices('sort'); // Get products' prices, create an array and sort its items from lowest to highest
         await productsPage.clickSortButton();
         await productsPage.selectSortingType('Low to High');
-        let currentSorting = await productsPage.getProductPrices('original');
+        let currentSorting = await productsPage.getProductPrices('original'); // Get products' prices after sorting
         expect(currentSorting).to.have.ordered.members(expectedSorting);
     });
 
     it('"+" Sorting by Price (High to Low)', async () => {
         await logInWithValidCreds();
-        let expectedSorting = await productsPage.getProductPrices('reverse');
+        let expectedSorting = await productsPage.getProductPrices('reverse'); // Get products' prices, create an array and sort its items from highest to lowest
         await productsPage.clickSortButton();
         await productsPage.selectSortingType('High to Low');
-        let currentSorting = await productsPage.getProductPrices('original');
+        let currentSorting = await productsPage.getProductPrices('original'); // Get products' prices after sorting
         expect(currentSorting).to.have.ordered.members(expectedSorting);
     });
 

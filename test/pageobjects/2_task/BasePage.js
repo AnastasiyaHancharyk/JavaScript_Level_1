@@ -69,6 +69,7 @@ export default class BasePage {
         return numberOfElements;
     };
 
+    // Function to get a text if there are several element corresponding to one selector
     async getTexts(selector, numberOfElement) {
         let texts = await $$(selector)[numberOfElement].getText();
         return texts;

@@ -16,6 +16,9 @@ export default class LocationPage extends BasePage {
 
     async selectFixedLocation () {
         await this.click(FIXED_LOCATION);
+    };
+
+    async getFixedLocationAddress () {
         let fixedLocationAddress = await this.getText(FIXED_LOCATION);
         return fixedLocationAddress.toLowerCase();
     };

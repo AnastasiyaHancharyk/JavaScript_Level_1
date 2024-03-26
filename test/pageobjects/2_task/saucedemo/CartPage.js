@@ -6,9 +6,6 @@ const CHECKOUT_BUTTON = '//*[@id="checkout"]';
 
 export default class CartPage extends BasePage {
 
-    openUrl(url) {
-        return super.openUrl(url);
-    };
 
     /**
     * Function to get products' name

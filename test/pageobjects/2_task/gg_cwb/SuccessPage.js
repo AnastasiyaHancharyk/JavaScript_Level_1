@@ -6,7 +6,6 @@ const APPT_DETAILS = '//*[contains(@class, "Success_appointmentDetails__U7svS")]
 
 export default class SuccessPage extends BasePage {
 
-
     async getApptDetails() {
         let numberOfAppt = await this.getNumberOfElements(APPT_DETAILS);
         if (numberOfAppt == 2) {

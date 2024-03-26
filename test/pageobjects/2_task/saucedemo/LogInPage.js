@@ -7,9 +7,6 @@ const ERROR_MESSAGE = '//*[@data-test="error"]'
 
 export default class LogInPage extends BasePage {
 
-    openUrl (url) {
-        return super.openUrl(url);
-    }
     
     async enterUsername (username) {
         await this.setValue(USERNAME_FIELD, username);

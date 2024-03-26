@@ -102,6 +102,7 @@ describe('Log In and Log Out scenarios', () => {
         // Log out from the application
         await productsPage.openHamburgerMenu();
         await productsPage.clickLogOutButton();
+        await verifyCurrentPageUrlEqualsExpected('https://www.saucedemo.com/');
 
     });
 
